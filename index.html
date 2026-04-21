@@ -1,463 +1,1412 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Refreshing Opportunities — Reyes Coca-Cola Bottling</title>
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --red: #E24B4A; --red-dark: #A32D2D; --red-light: #FCEBEB;
-  --green: #3B6D11; --green-text: #27500A; --green-bg: #EAF3DE;
-  --amber-bg: #FAEEDA; --amber-text: #633806;
-  --bg: #f5f4f1; --bg-card: #ffffff; --bg-secondary: #eeecea;
-  --text: #1a1a18; --text-2: #5f5e5a; --text-3: #888780;
-  --border: rgba(0,0,0,0.11); --border-md: rgba(0,0,0,0.22);
-  --radius: 8px; --radius-lg: 12px;
-  --font: 'DM Sans', system-ui, sans-serif;
-}
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
-body { font-family: var(--font); background: var(--bg); color: var(--text); min-height:100vh; padding:1.5rem 1rem; }
-.wrap { max-width:720px; margin:0 auto; }
-button { font-family: var(--font); cursor: pointer; }
-.btn { background:var(--bg-card); border:0.5px solid var(--border-md); border-radius:var(--radius); padding:6px 14px; font-size:12px; color:var(--text); }
-.btn:hover { background:var(--bg-secondary); }
-.btn.red { background:var(--red); border-color:var(--red); color:#fff; }
-.btn.red:hover { background:var(--red-dark); }
-.btn.green { background:var(--green); border-color:var(--green); color:#fff; }
-.btn.green:hover { background:var(--green-text); }
-.btn.outline-red { border-color:var(--red); color:var(--red); background:transparent; }
-.btn.outline-red:hover { background:var(--red-light); }
-.btn.sm { font-size:11px; padding:4px 10px; }
-.btn:disabled { opacity:0.5; cursor:not-allowed; }
-input[type=text], input[type=password], textarea {
-  width:100%; font-size:13px; padding:8px 10px; border-radius:var(--radius);
-  border:0.5px solid var(--border-md); background:var(--bg-card); color:var(--text);
-  margin-bottom:10px; font-family:var(--font); resize:vertical;
-}
-input:focus, textarea:focus { outline:none; border-color:var(--red); }
-.badge { font-size:11px; padding:3px 9px; border-radius:20px; font-weight:500; display:inline-block; }
-.pill { background:var(--bg-secondary); border-radius:20px; padding:3px 9px; font-size:11px; color:var(--text-2); display:inline-block; }
-.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px; }
-.stat { background:var(--bg-secondary); border-radius:var(--radius); padding:10px 14px; text-align:center; }
-.stat .lbl { font-size:11px; color:var(--text-2); margin-bottom:3px; }
-.stat .val { font-size:22px; font-weight:500; }
-.pulse { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--red); margin-right:4px; animation:pulse 1.6s infinite; vertical-align:middle; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.3)} }
-.filters { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
-.fbtn { border-radius:20px; padding:5px 13px; font-size:12px; color:var(--text-2); border:0.5px solid transparent; background:var(--bg-secondary); }
-.fbtn.active { background:var(--bg-card); border-color:var(--border-md); color:var(--text); font-weight:500; }
-.flip { perspective:900px; height:152px; cursor:pointer; margin-bottom:9px; }
-.flip-in { position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform 0.4s ease; }
-.flip:hover .flip-in, .flip.flipped .flip-in { transform:rotateY(180deg); }
-.face { position:absolute; width:100%; height:100%; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--radius-lg); border:0.5px solid var(--border); background:var(--bg-card); padding:1rem 1.25rem; display:flex; flex-direction:column; justify-content:space-between; }
-.face.back { transform:rotateY(180deg); }
-.flip.hot .face { border-left:3px solid var(--red); }
-.spot-section { margin-bottom:16px; display:none; }
-.spot-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
-.sec-lbl { font-size:11px; font-weight:500; color:var(--text-2); text-transform:uppercase; letter-spacing:.06em; }
-.car-outer { overflow:hidden; }
-.car-track { display:flex; gap:12px; transition:transform .4s ease; }
-.car-btn { width:30px; height:30px; border-radius:50%; background:var(--bg-card); border:0.5px solid var(--border-md); display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--text); }
-.car-btn:hover { background:var(--bg-secondary); }
-.spot-card { min-width:260px; max-width:260px; background:var(--bg-card); border:0.5px solid var(--border); border-radius:var(--radius-lg); padding:1rem; flex-shrink:0; position:relative; }
-.days-left { position:absolute; top:8px; right:8px; font-size:10px; background:var(--bg-secondary); color:var(--text-3); border-radius:20px; padding:2px 7px; }
-.avatar { border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:500; flex-shrink:0; font-size:11px; }
-.modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:100; align-items:center; justify-content:center; padding:1rem; }
-.modal-bg.open { display:flex; }
-.modal { background:var(--bg-card); border-radius:var(--radius-lg); padding:1.5rem; width:100%; max-width:440px; border:0.5px solid var(--border); max-height:90vh; overflow-y:auto; }
-.modal-sm { max-width:320px; }
-.modal-hd { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; }
-.divider { height:.5px; background:var(--border); margin:12px 0; }
-.pending-card { background:var(--bg-secondary); border-radius:var(--radius-lg); padding:10px 12px; margin-bottom:8px; border-left:3px solid #BA7517; }
-.live-card { background:var(--bg-secondary); border-radius:var(--radius-lg); padding:10px 12px; margin-bottom:8px; border-left:3px solid var(--green); }
-.notice { background:var(--amber-bg); border-radius:var(--radius); padding:8px 12px; margin-bottom:12px; font-size:12px; color:var(--amber-text); line-height:1.5; }
-.ref-bar { margin-top:14px; background:var(--bg-secondary); border-radius:var(--radius-lg); padding:1rem 1.25rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
-.spinner { display:inline-block; width:11px; height:11px; border:2px solid var(--border-md); border-top-color:var(--red); border-radius:50%; animation:spin .7s linear infinite; margin-right:5px; vertical-align:middle; }
-@keyframes spin { to { transform:rotate(360deg); } }
-a { text-decoration:none; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCCB Internal Opportunities</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --background: #f5f4f1;
+      --foreground: #1a1a18;
+      --card: #ffffff;
+      --card-foreground: #1a1a18;
+      --primary: #E24B4A;
+      --primary-foreground: #ffffff;
+      --secondary: #eeecea;
+      --secondary-foreground: #1a1a18;
+      --muted: #eeecea;
+      --muted-foreground: #5f5e5a;
+      --accent: #3B6D11;
+      --destructive: #A32D2D;
+      --border: rgba(0, 0, 0, 0.11);
+      --radius: 0.625rem;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.5;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+
+    .space-y-3 > * + * {
+      margin-top: 0.75rem;
+    }
+
+    .space-y-2 > * + * {
+      margin-top: 0.5rem;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    .header p {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Search Input */
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-wrapper svg {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1rem;
+      height: 1rem;
+      color: var(--muted-foreground);
+    }
+
+    .search-input {
+      padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      width: 12rem;
+      background: var(--card);
+    }
+
+    .search-input:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: -1px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--foreground);
+    }
+
+    .btn-outline:hover {
+      background: var(--secondary);
+    }
+
+    .btn-outline-primary {
+      background: transparent;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline-primary:hover {
+      background: rgba(226, 75, 74, 0.1);
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .btn-icon {
+      padding: 0.5rem;
+      border-radius: 50%;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn-white:hover {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .btn-green {
+      background: #3B6D11;
+      color: white;
+    }
+
+    .btn-green:hover {
+      background: #27500A;
+    }
+
+    .btn-destructive {
+      background: var(--destructive);
+      color: white;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+
+    .card-secondary {
+      background: var(--secondary);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 0.75rem 1rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    .stat-value-hot {
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+    }
+
+    /* Subscribe Banner */
+    .subscribe-banner {
+      background: linear-gradient(to right, var(--primary), var(--destructive));
+      border-radius: 0.75rem;
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .subscribe-banner p {
+      color: white;
+      font-size: 0.875rem;
+    }
+
+    .subscribe-banner .subtitle {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .subscribe-banner .title {
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .badge-hot {
+      background: #FCEBEB;
+      color: #A32D2D;
+    }
+
+    .badge-regular {
+      background: #EAF3DE;
+      color: #27500A;
+    }
+
+    .badge-secondary {
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+    }
+
+    /* Pulse Dot */
+    .pulse-dot {
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: pulse-dot 1.6s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.4;
+        transform: scale(1.3);
+      }
+    }
+
+    /* Category Filters */
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .category-btn {
+      padding: 0.375rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: var(--secondary);
+      color: var(--muted-foreground);
+    }
+
+    .category-btn:hover {
+      background: #e5e3e0;
+    }
+
+    .category-btn.active {
+      background: var(--card);
+      border-color: var(--border);
+      font-weight: 500;
+      color: var(--foreground);
+    }
+
+    /* Feed Status */
+    .feed-status {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    /* Spotlight Carousel */
+    .carousel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .carousel-header p {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .carousel-nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .carousel-container {
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 0.75rem;
+      transition: transform 0.3s ease-out;
+    }
+
+    .spotlight-card {
+      min-width: 264px;
+      max-width: 264px;
+      padding: 1rem;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .spotlight-card .badge {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.625rem;
+    }
+
+    .spotlight-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .avatar {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .spotlight-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .spotlight-title {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    .spotlight-job {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .spotlight-location {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .spotlight-quote {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .spotlight-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .spotlight-footer span {
+      font-size: 0.625rem;
+      color: var(--muted-foreground);
+    }
+
+    /* Job Cards - Flip Animation */
+    .flip-card {
+      perspective: 1000px;
+      cursor: pointer;
+      height: 152px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .flip-card-front {
+      z-index: 2;
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card.hot .flip-card-face {
+      border-left: 3px solid var(--primary);
+    }
+
+    .flip-card:hover .flip-card-face {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .job-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .job-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .job-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .job-footer span {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    .job-description {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      line-height: 1.5;
+    }
+
+    /* Referral Bar */
+    .referral-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .referral-bar .title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .referral-bar .subtitle {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      max-width: 400px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-lg {
+      max-width: 500px;
+    }
+
+    .modal h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .modal .description {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      margin-bottom: 1rem;
+    }
+
+    .modal input, .modal textarea {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      font-family: inherit;
+    }
+
+    .modal input:focus, .modal textarea:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: -1px;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .modal .note {
+      font-size: 0.625rem;
+      color: var(--muted-foreground);
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    .info-box {
+      background: #FAEEDA;
+      color: #633806;
+      font-size: 0.75rem;
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .message-box {
+      padding: 0.5rem;
+      border-radius: var(--radius);
+      font-size: 0.75rem;
+      margin-bottom: 0.75rem;
+      display: none;
+    }
+
+    .message-success {
+      background: #EAF3DE;
+      color: #27500A;
+    }
+
+    .message-error {
+      background: #FCEBEB;
+      color: #A32D2D;
+    }
+
+    /* Admin Panel */
+    .admin-section {
+      margin-bottom: 1rem;
+    }
+
+    .admin-section-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-card {
+      background: var(--secondary);
+      border-radius: var(--radius);
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-left: 3px solid #BA7517;
+    }
+
+    .admin-card.approved {
+      border-left-color: #3B6D11;
+    }
+
+    .admin-card-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .admin-card-name span {
+      font-weight: 400;
+      color: var(--muted-foreground);
+    }
+
+    .admin-card-details {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin: 0.25rem 0;
+    }
+
+    .admin-card-quote {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-card-date {
+      font-size: 0.625rem;
+      color: var(--muted-foreground);
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-card-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .admin-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1rem 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .header {
+        flex-direction: column;
+      }
+
+      .subscribe-banner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .referral-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
-    <div>
-      <h1 style="font-size:20px;font-weight:500;">Refreshing opportunities</h1>
-      <p style="font-size:12px;color:var(--text-2);">Reyes Coca-Cola Bottling &nbsp;·&nbsp; internal careers</p>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-      <input type="text" id="searchInput" placeholder="Search roles or locations..." style="width:190px;margin:0;font-size:12px;" oninput="filterJobs()" />
-      <button class="btn outline-red" onclick="openSubmitModal()">+ Manager spotlight</button>
-      <button class="btn sm" onclick="openAdminLogin()">⚙ Admin</button>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><div class="lbl">Open positions</div><div class="val" id="totalCount">—</div></div>
-    <div class="stat"><div class="lbl">Hot jobs</div><div class="val" style="color:var(--red);"><span class="pulse"></span><span id="hotCount">—</span></div></div>
-    <div class="stat"><div class="lbl">Referral bonus</div><div class="val" style="color:var(--green-text);">$1,500</div></div>
-  </div>
-
-  <div class="spot-section" id="spotSection">
-    <div class="spot-header">
-      <p class="sec-lbl">Manager spotlight</p>
-      <div style="display:flex;gap:6px;">
-        <button class="car-btn" onclick="slideCarousel(-1)">&#8592;</button>
-        <button class="car-btn" onclick="slideCarousel(1)">&#8594;</button>
-      </div>
-    </div>
-    <div class="car-outer"><div class="car-track" id="carTrack"></div></div>
-  </div>
-
-  <div class="filters">
-    <button class="fbtn active" onclick="setFilter('All',this)">All</button>
-    <button class="fbtn" onclick="setFilter('Sales',this)">Sales</button>
-    <button class="fbtn" onclick="setFilter('Maintenance',this)">Maintenance</button>
-    <button class="fbtn" onclick="setFilter('Marketing',this)">Marketing</button>
-    <button class="fbtn" onclick="setFilter('Warehouse',this)">Warehouse</button>
-    <button class="fbtn" onclick="setFilter('Drivers',this)">Drivers</button>
-    <button class="fbtn" onclick="setFilter('IT',this)">IT</button>
-    <button class="fbtn" onclick="setFilter('Operations',this)">Operations</button>
-    <button class="fbtn" onclick="setFilter('Manufacturing',this)">Manufacturing</button>
-  </div>
-
-  <p style="font-size:11px;color:var(--text-3);margin-bottom:8px;" id="feedStatus"><span class="spinner"></span>Loading live jobs...</p>
-  <div id="jobList"></div>
-
-  <div class="ref-bar">
-    <div>
-      <p style="font-size:13px;font-weight:500;">Know someone great? Refer them.</p>
-      <p style="font-size:12px;color:var(--text-2);">Earn up to $1,500 for a successful referral hire.</p>
-    </div>
-    <a href="https://internal-reyesholdings.icims.com/" target="_blank"><button class="btn">Learn more ↗</button></a>
-  </div>
-</div>
-
-<!-- Submit Modal -->
-<div class="modal-bg" id="submitModal" onclick="if(event.target===this)closeSubmitModal()">
-  <div class="modal">
-    <div class="modal-hd">
+  <div class="container space-y-4">
+    <!-- Header -->
+    <div class="header">
       <div>
-        <h2 style="font-size:16px;font-weight:500;">Submit a manager spotlight</h2>
-        <p style="font-size:12px;color:var(--text-2);margin-top:2px;">Reviewed by an admin before going live</p>
+        <h1>Refreshing opportunities</h1>
+        <p>Reyes Coca-Cola Bottling · internal careers</p>
       </div>
-      <button class="btn sm" onclick="closeSubmitModal()">✕</button>
+      <div class="header-actions">
+        <div class="search-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input type="text" class="search-input" placeholder="Search roles or locations..." id="searchInput">
+        </div>
+        <button class="btn btn-outline-primary" onclick="openModal('spotlightModal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+          Manager spotlight
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="openModal('adminLoginModal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          Admin
+        </button>
+      </div>
     </div>
-    <input type="text" id="mgrName" placeholder="Your name (e.g. James Morales)" />
-    <input type="text" id="mgrTitle" placeholder="Your title (e.g. Regional Sales Manager)" />
-    <input type="text" id="mgrJob" placeholder="Job you're highlighting (e.g. Route Sales Supervisor)" />
-    <input type="text" id="mgrLocation" placeholder="Location (e.g. Los Angeles, CA)" />
-    <textarea id="mgrQuote" rows="3" placeholder="Your quote — what kind of person are you looking for? (1–2 sentences)"></textarea>
-    <input type="text" id="mgrLink" placeholder="Job link (paste from iCIMS or job portal)" />
-    <div class="notice">Your spotlight will be reviewed by an admin before appearing on the board. It will automatically expire 7 days after approval.</div>
-    <div id="submitMsg" style="display:none;font-size:12px;padding:8px 10px;border-radius:var(--radius);margin-bottom:10px;"></div>
-    <div style="display:flex;gap:8px;justify-content:flex-end;">
-      <button class="btn" onclick="closeSubmitModal()">Cancel</button>
-      <button class="btn red" id="submitBtn" onclick="submitSpotlight()">Submit for review ↗</button>
-    </div>
-  </div>
-</div>
 
-<!-- Admin Login -->
-<div class="modal-bg" id="adminLoginModal" onclick="if(event.target===this)closeAdminLogin()">
-  <div class="modal modal-sm">
-    <div class="modal-hd">
-      <h2 style="font-size:16px;font-weight:500;">Admin access</h2>
-      <button class="btn sm" onclick="closeAdminLogin()">✕</button>
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="card stat-card">
+        <p class="stat-label">Featured jobs</p>
+        <p class="stat-value" id="totalJobs">0</p>
+      </div>
+      <div class="card stat-card">
+        <p class="stat-label">Hot jobs</p>
+        <p class="stat-value stat-value-hot">
+          <span class="pulse-dot"></span>
+          <span id="hotJobs">0</span>
+        </p>
+      </div>
     </div>
-    <p style="font-size:13px;color:var(--text-2);margin-bottom:12px;">Enter the admin password to manage spotlights.</p>
-    <input type="password" id="adminPwd" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdminPwd()" />
-    <p id="pwdError" style="font-size:12px;color:var(--red);display:none;margin-bottom:8px;">Incorrect password. Please try again.</p>
-    <div style="display:flex;gap:8px;justify-content:flex-end;">
-      <button class="btn" onclick="closeAdminLogin()">Cancel</button>
-      <button class="btn red" onclick="checkAdminPwd()">Enter ↗</button>
-    </div>
-  </div>
-</div>
 
-<!-- Admin Panel -->
-<div class="modal-bg" id="adminModal" onclick="if(event.target===this)closeAdmin()">
-  <div class="modal" style="max-width:500px;">
-    <div class="modal-hd">
+    <!-- Subscribe Banner -->
+    <div class="subscribe-banner" id="subscribeBanner">
       <div>
-        <h2 style="font-size:16px;font-weight:500;">Admin panel</h2>
-        <p style="font-size:12px;color:var(--text-2);margin-top:2px;">Approve, reject, or remove manager spotlights</p>
+        <p class="title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          Get the Monday morning hot jobs digest
+        </p>
+        <p class="subtitle">Top 5 freshest RCCB roles delivered to your inbox every week</p>
       </div>
-      <button class="btn sm" onclick="closeAdmin()">✕</button>
+      <button class="btn btn-white" onclick="openModal('subscribeModal')">Subscribe</button>
     </div>
-    <p class="sec-lbl" style="margin-bottom:8px;">Pending review &nbsp;<span id="pendingBadge" style="color:var(--amber-text);font-weight:500;"></span></p>
-    <div id="pendingList"></div>
-    <div class="divider"></div>
-    <p class="sec-lbl" style="margin-bottom:8px;">Live spotlights &nbsp;<span id="liveBadge" style="color:var(--green-text);font-weight:500;"></span></p>
-    <div id="liveList"></div>
+
+    <!-- Manager Spotlight Carousel -->
+    <div class="space-y-3" id="spotlightSection" style="display: none;">
+      <div class="carousel-header">
+        <p>Manager spotlight</p>
+        <div class="carousel-nav">
+          <button class="btn btn-outline btn-icon" onclick="scrollCarousel('left')" id="carouselLeft">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+          </button>
+          <button class="btn btn-outline btn-icon" onclick="scrollCarousel('right')" id="carouselRight">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+        </div>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-track" id="spotlightCarousel">
+          <!-- Spotlight cards will be inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="category-filters" id="categoryFilters">
+      <button class="category-btn active" data-category="All">All</button>
+      <button class="category-btn" data-category="Sales">Sales</button>
+      <button class="category-btn" data-category="Maintenance">Maintenance</button>
+      <button class="category-btn" data-category="Marketing">Marketing</button>
+      <button class="category-btn" data-category="Warehouse">Warehouse</button>
+      <button class="category-btn" data-category="Drivers">Drivers</button>
+      <button class="category-btn" data-category="IT">IT</button>
+      <button class="category-btn" data-category="Operations">Operations</button>
+      <button class="category-btn" data-category="Manufacturing">Manufacturing</button>
+    </div>
+
+    <!-- Feed Status -->
+    <p class="feed-status" id="feedStatus">Loading live jobs...</p>
+
+    <!-- Job Cards -->
+    <div class="space-y-3" id="jobsContainer">
+      <!-- Job cards will be inserted here -->
+    </div>
+
+    <!-- Referral Bar -->
+    <div class="card card-secondary">
+      <div class="referral-bar">
+        <div>
+          <p class="title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Know someone great? Refer them.
+          </p>
+          <p class="subtitle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            Earn up to $1,500 for a successful referral hire.
+          </p>
+        </div>
+        https://internal-reyesholdings.icims.com/
+      </div>
+    </div>
   </div>
-</div>
 
-<script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwTRH6f-ArwxUXWy8xCmOeFcBStgSweJPfhTKoxwXs9M84wMJ9EhMT6NsoD-ObCweLvbA/exec';
-const ADMIN_PASSWORD = 'RCCB123';
-const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+  <!-- Subscribe Modal -->
+  <div class="modal-overlay" id="subscribeModal">
+    <div class="modal">
+      <h2>Get the weekly hot jobs digest</h2>
+      <p class="description">Every Monday at 8am — top 5 freshest RCCB roles</p>
+      <input type="text" placeholder="Your name (e.g. Maria Garcia)" id="subName">
+      <input type="email" placeholder="Your work email address" id="subEmail">
+      <div class="message-box" id="subMessage"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('subscribeModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="handleSubscribe()">Subscribe</button>
+      </div>
+      <p class="note">Unsubscribe any time — one click in every email</p>
+    </div>
+  </div>
 
-const catColors = {
-  Sales:["#E1F5EE","#085041"],Maintenance:["#EEEDFE","#3C3489"],
-  Marketing:["#FAEEDA","#633806"],Warehouse:["#FBEAF0","#72243E"],
-  Drivers:["#E6F1FB","#0C447C"],IT:["#FAEEDA","#633806"],
-  Operations:["#E1F5EE","#085041"],Manufacturing:["#FCEBEB","#A32D2D"]
-};
-const avColors=[["#E6F1FB","#0C447C"],["#E1F5EE","#085041"],["#FAEEDA","#633806"],["#FBEAF0","#72243E"],["#EEEDFE","#3C3489"]];
-const FALLBACK=[
-  {id:31617,title:"Cloud Solutions Manager",cat:"IT",loc:"Niles, Illinois",age:0,desc:"Architect and manage cloud infrastructure for RCCB. Lead Azure/AWS initiatives and drive digital transformation across our bottling operations."},
-  {id:31623,title:"Delivery Manager",cat:"Drivers",loc:"Fresno, California",age:0,desc:"Oversee CDL drivers delivering Coca-Cola products across Fresno. Manage dispatch, safety compliance, and driver performance."},
-  {id:31605,title:"Production Supervisor",cat:"Manufacturing",loc:"San Leandro, California",age:0,desc:"Lead production line teams across assigned shifts. Ensure safety, quality, and output targets while developing your frontline crew."},
-  {id:31602,title:"CDL Class A Driver",cat:"Drivers",loc:"Alsip, Illinois",age:1,desc:"Deliver Coca-Cola products to retail and foodservice accounts. Requires valid Class A CDL, clean MVR, and commitment to safe on-time service."},
-  {id:31601,title:"Relief Account Manager",cat:"Sales",loc:"Oceanside, California",age:1,desc:"Cover assigned sales routes across Oceanside. Build customer relationships and execute promotional programs."},
-  {id:31600,title:"Account Manager, On Premise",cat:"Sales",loc:"Milwaukee, Wisconsin",age:1,desc:"Grow Coca-Cola's presence across restaurants, bars, and venues in Milwaukee. Own your account list and hit volume targets."},
-  {id:31578,title:"Customer Growth Representative",cat:"Sales",loc:"Bakersfield, California",age:2,desc:"Identify and acquire new retail accounts in Bakersfield. Partner with route reps to execute promotions and expand our customer base."},
-  {id:31573,title:"Merchandiser",cat:"Marketing",loc:"Riverside, California",age:2,desc:"Ensure Coca-Cola products are fully stocked and visually compelling across retail stores. Great entry point with a path to route sales."},
-  {id:31563,title:"Merchandiser",cat:"Marketing",loc:"Schofield, Wisconsin",age:2,desc:"Keep shelves stocked and displays sharp across retail accounts. Reliable vehicle and ability to lift 50 lbs required."},
-  {id:31553,title:"Merchandiser",cat:"Marketing",loc:"Riverside, California",age:3,desc:"Support route sales reps by merchandising product in assigned retail locations. Flexible scheduling with growth opportunities."},
-  {id:31527,title:"Cooler Mover – Class A",cat:"Drivers",loc:"San Leandro, California",age:3,desc:"Transport and install cold drink equipment across customer locations. Requires Class A CDL and comfort with refrigeration equipment."},
-  {id:31526,title:"Sales Account Manager",cat:"Sales",loc:"Alsip, Illinois",age:3,desc:"Manage grocery and convenience accounts in Alsip. Drive promotions, maintain buyer relationships, and grow volume."},
-  {id:31476,title:"Maintenance Buyer",cat:"Maintenance",loc:"Rancho Cucamonga, California",age:4,desc:"Procure parts and supplies for our production facility. Manage vendor relationships and support the maintenance team."},
-  {id:31475,title:"Maintenance Planner",cat:"Maintenance",loc:"Rancho Cucamonga, California",age:4,desc:"Schedule preventive and corrective maintenance across our facility. Work with technicians and operations leaders to minimize downtime."},
-  {id:30427,title:'Order Builder "Loader"',cat:"Warehouse",loc:"Eagan, Minnesota",age:5,desc:"Build and stage orders in our distribution center for next-day delivery. Fast-paced environment with opportunities to advance."},
-  {id:31574,title:"Operations Assistant",cat:"Operations",loc:"Eagan, Minnesota",age:5,desc:"Support daily operations including scheduling and inventory coordination. Great stepping stone into operations leadership."},
-];
+  <!-- Spotlight Modal -->
+  <div class="modal-overlay" id="spotlightModal">
+    <div class="modal">
+      <h2>Submit a manager spotlight</h2>
+      <p class="description">Reviewed by an admin before going live</p>
+      <input type="text" placeholder="Your name (e.g. James Morales)" id="spotName">
+      <input type="text" placeholder="Your title (e.g. Regional Sales Manager)" id="spotTitle">
+      <input type="text" placeholder="Job you're highlighting (e.g. Route Sales Supervisor)" id="spotJob">
+      <input type="text" placeholder="Location (e.g. Los Angeles, CA)" id="spotLocation">
+      <textarea placeholder="Your quote — what kind of person are you looking for? (1–2 sentences)" id="spotQuote" rows="3"></textarea>
+      <input type="text" placeholder="Job link (paste from iCIMS or job portal)" id="spotLink">
+      <div class="info-box">
+        Your spotlight will be reviewed by an admin before appearing on the board. It will automatically expire 7 days after approval.
+      </div>
+      <div class="message-box" id="spotMessage"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('spotlightModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="handleSpotlightSubmit()">Submit for review ↗</button>
+      </div>
+    </div>
+  </div>
 
-let JOBS=[],currentFilter='All',carouselIdx=0,pending=[],approved=[];
+  <!-- Admin Login Modal -->
+  <div class="modal-overlay" id="adminLoginModal">
+    <div class="modal">
+      <h2>Admin access</h2>
+      <p class="description">Enter the admin password to manage spotlights.</p>
+      <input type="password" placeholder="Password" id="adminPassword" onkeydown="if(event.key==='Enter')handleAdminLogin()">
+      <div class="message-box message-error" id="adminError">Incorrect password. Please try again.</div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('adminLoginModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="handleAdminLogin()">Enter ↗</button>
+      </div>
+    </div>
+  </div>
 
-function initials(n){return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
-function ageBadge(a){
-  if(a===0)return`<span class="badge" style="background:#FCEBEB;color:#A32D2D;"><span class="pulse"></span>Today</span>`;
-  if(a===1)return`<span class="badge" style="background:#FCEBEB;color:#A32D2D;">Yesterday</span>`;
-  return`<span class="badge" style="background:#EAF3DE;color:#27500A;">${a} days ago</span>`;
-}
+  <!-- Admin Panel Modal -->
+  <div class="modal-overlay" id="adminPanelModal">
+    <div class="modal modal-lg">
+      <h2>Admin panel</h2>
+      <p class="description">Approve, reject, or remove manager spotlights</p>
+      
+      <div class="admin-section">
+        <p class="admin-section-title">Pending review <span id="pendingCount"></span></p>
+        <div id="pendingList">
+          <p style="font-size: 0.875rem; color: var(--muted-foreground);">No pending submissions.</p>
+        </div>
+      </div>
 
-/* JSONP — bypasses CORS for both reads and writes */
-function jsonp(url){
-  return new Promise((resolve,reject)=>{
-    const cb='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
-    const script=document.createElement('script');
-    const timer=setTimeout(()=>{cleanup();reject(new Error('timeout'));},12000);
-    window[cb]=(data)=>{cleanup();resolve(data);};
-    function cleanup(){clearTimeout(timer);delete window[cb];script.parentNode&&script.parentNode.removeChild(script);}
-    script.onerror=()=>{cleanup();reject(new Error('load error'));};
-    const sep=url.includes('?')?'&':'?';
-    script.src=url+sep+'callback='+cb+'&t='+Date.now();
-    document.head.appendChild(script);
-  });
-}
+      <div class="divider"></div>
 
-async function sheetRead(){
-  try{const r=await jsonp(SCRIPT_URL);return r.success?r.data:[];}
-  catch(e){console.warn('sheetRead:',e);return[];}
-}
-async function sheetWrite(params){
-  try{
-    const qs=Object.entries(params).map(([k,v])=>encodeURIComponent(k)+'='+encodeURIComponent(v)).join('&');
-    const r=await jsonp(SCRIPT_URL+'?'+qs);
-    return r&&r.success;
-  }catch(e){console.warn('sheetWrite:',e);return false;}
-}
+      <div class="admin-section">
+        <p class="admin-section-title">Live spotlights <span id="liveCount"></span></p>
+        <div id="liveList">
+          <p style="font-size: 0.875rem; color: var(--muted-foreground);">No live spotlights.</p>
+        </div>
+      </div>
 
-async function loadSpotlights(){
-  const data=await sheetRead();
-  const now=Date.now();
-  pending=data.filter(s=>s.status==='pending');
-  approved=data.filter(s=>s.status==='approved'&&Number(s.expires)>now);
-  renderCarousel();
-}
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('adminPanelModal')">Close</button>
+      </div>
+    </div>
+  </div>
 
-async function fetchJobs(){
-  try{
-    const res=await fetch('https://reyescocacola.com/careers');
-    if(!res.ok)throw new Error();
-    const html=await res.text();
-    const doc=new DOMParser().parseFromString(html,'text/html');
-    const links=[...doc.querySelectorAll('a[href*="/allbusinessunit/jobs/"]')];
-    const seen=new Set();const parsed=[];
-    links.forEach(a=>{
-      const m=a.href.match(/\/jobs\/(\d+)/);
-      if(!m||seen.has(m[1]))return;
-      seen.add(m[1]);
-      const id=parseInt(m[1]);
-      const h=a.querySelector('h3');
-      const title=(h||a).textContent.trim().replace(/\s+/g,' ');
-      const spans=[...a.querySelectorAll('span,p')].map(el=>el.textContent.trim()).filter(Boolean);
-      if(title&&title.length>3)parsed.push({id,title,cat:spans[0]||'General',loc:spans[1]||'',age:Math.min(parsed.length,5),desc:FALLBACK.find(f=>f.id===id)?.desc||`Join RCCB as a ${title}. Click Apply to learn more.`});
+  <script>
+    // Configuration
+    const FLOW_URL = 'https://a477fe69c32a4af79331a1752086c6.34.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/a7e5f0b464f244258bc07b14f9dbaf35/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=7g1H_G2S34bANHFlJ4l7PaJATRlINrELa1D_mJ17ICk';
+    const ADMIN_PASSWORD = 'RCCB123';
+
+    // State
+    let jobs = [];
+    let allSpotlights = [];
+    let activeCategory = 'All';
+    let carouselPosition = 0;
+
+    // Category colors
+    const categoryColors = {
+      Sales: { bg: '#E1F5EE', text: '#085041' },
+      Maintenance: { bg: '#EEEDFE', text: '#3C3489' },
+      Marketing: { bg: '#FAEEDA', text: '#633806' },
+      Warehouse: { bg: '#FBEAF0', text: '#72243E' },
+      Drivers: { bg: '#E6F1FB', text: '#0C447C' },
+      IT: { bg: '#FAEEDA', text: '#633806' },
+      Operations: { bg: '#E1F5EE', text: '#085041' },
+      Manufacturing: { bg: '#FCEBEB', text: '#A32D2D' },
+    };
+
+    const avatarColors = [
+      { bg: '#E6F1FB', text: '#0C447C' },
+      { bg: '#E1F5EE', text: '#085041' },
+      { bg: '#FAEEDA', text: '#633806' },
+      { bg: '#FBEAF0', text: '#72243E' },
+      { bg: '#EEEDFE', text: '#3C3489' },
+    ];
+
+    // Helper functions
+    function getCategoryValue(category) {
+      if (!category) return '';
+      if (typeof category === 'string') return category;
+      if (typeof category === 'object' && category.Value) return category.Value;
+      return '';
+    }
+
+    function getStatusValue(status) {
+      if (!status) return '';
+      if (typeof status === 'string') return status;
+      if (typeof status === 'object' && status.Value) return status.Value;
+      return '';
+    }
+
+    function getDaysAgo(dateStr) {
+      if (!dateStr) return 0;
+      const now = new Date();
+      const date = new Date(dateStr);
+      return Math.floor((now - date) / (1000 * 60 * 60 * 24));
+    }
+
+    function getDaysLeft(dateStr) {
+      if (!dateStr) return 0;
+      const now = new Date();
+      const date = new Date(dateStr);
+      return Math.max(0, Math.ceil((date - now) / (1000 * 60 * 60 * 24)));
+    }
+
+    function isHotJob(job) {
+      if (job.IsFeatured === true) return true;
+      if (!job.FeaturedDate) return false;
+      return getDaysAgo(job.FeaturedDate) <= 7;
+    }
+
+    function getInitials(name) {
+      if (!name) return '??';
+      return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    // API calls
+    async function callFlow(action, data) {
+      try {
+        const response = await fetch(FLOW_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action, data }),
+        });
+        const text = await response.text();
+        if (!text) return { success: true };
+        return JSON.parse(text);
+      } catch (error) {
+        console.error('Flow error:', error);
+        return { success: false, error: String(error) };
+      }
+    }
+
+    async function loadJobs() {
+      const result = await callFlow('getJobs');
+      if (result.success && result.data) {
+        jobs = result.data;
+        renderJobs();
+        updateStats();
+      }
+    }
+
+    async function loadSpotlights() {
+      const result = await callFlow('getAll');
+      if (result.success && result.data) {
+        allSpotlights = result.data;
+        renderSpotlights();
+        renderAdminPanel();
+      }
+    }
+
+    // Render functions
+    function updateStats() {
+      document.getElementById('totalJobs').textContent = jobs.length;
+      document.getElementById('hotJobs').textContent = jobs.filter(isHotJob).length;
+    }
+
+    function renderJobs() {
+      const container = document.getElementById('jobsContainer');
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      
+      const filteredJobs = jobs
+        .filter(job => {
+          const category = getCategoryValue(job.Category);
+          const matchesCategory = activeCategory === 'All' || category === activeCategory;
+          const matchesSearch = !searchQuery || 
+            job.Title?.toLowerCase().includes(searchQuery) ||
+            job.Location?.toLowerCase().includes(searchQuery) ||
+            category.toLowerCase().includes(searchQuery);
+          return matchesCategory && matchesSearch;
+        })
+        .sort((a, b) => {
+          const aHot = isHotJob(a);
+          const bHot = isHotJob(b);
+          if (aHot && !bHot) return -1;
+          if (!aHot && bHot) return 1;
+          return new Date(b.FeaturedDate || 0) - new Date(a.FeaturedDate || 0);
+        });
+
+      document.getElementById('feedStatus').textContent = 
+        `${filteredJobs.length} positions · refreshed ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+      if (filteredJobs.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--muted-foreground); padding: 2rem;">No roles match your search.</p>';
+        return;
+      }
+
+      container.innerHTML = filteredJobs.map(job => {
+        const jobIsHot = isHotJob(job);
+        const category = getCategoryValue(job.Category);
+        const catColor = categoryColors[category] || { bg: '#F1EFE8', text: '#5F5E5A' };
+        const daysAgo = getDaysAgo(job.FeaturedDate);
+        
+        let ageBadge;
+        if (daysAgo === 0) {
+          ageBadge = `<span class="badge badge-hot"><span class="pulse-dot" style="width: 6px; height: 6px;"></span> Today</span>`;
+        } else if (daysAgo === 1) {
+          ageBadge = `<span class="badge badge-hot">Yesterday</span>`;
+        } else if (jobIsHot) {
+          ageBadge = `<span class="badge badge-hot">${daysAgo} days ago</span>`;
+        } else {
+          ageBadge = `<span class="badge badge-regular">${daysAgo} days ago</span>`;
+        }
+
+        return `
+          <div class="flip-card ${jobIsHot ? 'hot' : ''}">
+            <div class="flip-card-inner">
+              <div class="flip-card-face flip-card-front">
+                <div>
+                  <div class="job-badges">
+                    ${ageBadge}
+                    <span class="badge" style="background: ${catColor.bg}; color: ${catColor.text};">${category}</span>
+                    <span class="badge badge-secondary">${job.Location || ''}</span>
+                  </div>
+                  <p class="job-title">${job.Title || ''}</p>
+                </div>
+                <div class="job-footer">
+                  <span>Hover to view job description</span>
+                  <a href="${job.JobPortalLink || '#'}" target="_blank" class="btn ${jobIsHot ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="event.stopPropagation();">
+                    Apply
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="flip-card-face flip-card-back">
+                <div>
+                  <p class="job-title" style="margin-bottom: 0.5rem;">${job.Title || ''} <span class="badge badge-secondary" style="font-size: 0.625rem;">${job.Location || ''}</span></p>
+                  <p class="job-description">${job.Description || ''}</p>
+                </div>
+                <div style="display: flex; justify-content: flex-end;">
+                  <a href="${job.JobPortalLink || '#'}" target="_blank" class="btn ${jobIsHot ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="event.stopPropagation();">
+                    Apply
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderSpotlights() {
+      const section = document.getElementById('spotlightSection');
+      const carousel = document.getElementById('spotlightCarousel');
+      
+      const approvedSpotlights = allSpotlights.filter(s => {
+        const status = getStatusValue(s.Status);
+        const notExpired = s.ExpiresAt ? new Date(s.ExpiresAt) > new Date() : true;
+        return status === 'approved' && notExpired;
+      });
+      
+      if (approvedSpotlights.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+      
+      section.style.display = 'block';
+      
+      carousel.innerHTML = approvedSpotlights.map((spotlight, index) => {
+        const colors = avatarColors[index % avatarColors.length];
+        const daysLeft = getDaysLeft(spotlight.ExpiresAt);
+        const daysAgo = getDaysAgo(spotlight.ApprovedAt);
+        
+        return `
+          <div class="card spotlight-card">
+            <span class="badge badge-secondary">${daysLeft}d left</span>
+            <div class="spotlight-header">
+              <div class="avatar" style="background: ${colors.bg}; color: ${colors.text};">
+                ${getInitials(spotlight.Title)}
+              </div>
+              <div>
+                <p class="spotlight-name">${spotlight.Title || ''}</p>
+                <p class="spotlight-title">${spotlight.ManagerTitle || 'Hiring Manager'}</p>
+              </div>
+            </div>
+            <p class="spotlight-job">${spotlight.HighlightedJob || ''}</p>
+            ${spotlight.JobLocation ? `
+              <p class="spotlight-location">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                ${spotlight.JobLocation}
+              </p>
+            ` : ''}
+            <p class="spotlight-quote">"${spotlight.Quote || ''}"</p>
+            <div class="spotlight-footer">
+              <span>Live ${daysAgo === 0 ? 'today' : daysAgo + 'd ago'}</span>
+              ${spotlight.JobLink ? `
+                <a href="${spotlight.JobLink}" target="_blank" class="btn btn-outline btn-sm">
+                  View job
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
+                </a>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderAdminPanel() {
+      const pendingSpotlights = allSpotlights.filter(s => getStatusValue(s.Status) === 'pending');
+      const approvedSpotlights = allSpotlights.filter(s => {
+        const status = getStatusValue(s.Status);
+        const notExpired = s.ExpiresAt ? new Date(s.ExpiresAt) > new Date() : true;
+        return status === 'approved' && notExpired;
+      });
+
+      // Update counts
+      document.getElementById('pendingCount').textContent = pendingSpotlights.length > 0 ? `(${pendingSpotlights.length})` : '';
+      document.getElementById('liveCount').textContent = approvedSpotlights.length > 0 ? `(${approvedSpotlights.length})` : '';
+
+      // Render pending list
+      const pendingList = document.getElementById('pendingList');
+      if (pendingSpotlights.length === 0) {
+        pendingList.innerHTML = '<p style="font-size: 0.875rem; color: var(--muted-foreground);">No pending submissions.</p>';
+      } else {
+        pendingList.innerHTML = pendingSpotlights.map(s => `
+          <div class="admin-card">
+            <p class="admin-card-name">${s.Title} <span>· ${s.ManagerTitle || 'No title'}</span></p>
+            <p class="admin-card-details">${s.HighlightedJob} · ${s.JobLocation || 'No location'}</p>
+            <p class="admin-card-quote">"${s.Quote}"</p>
+            <p class="admin-card-date">Submitted ${s.SubmittedAt ? new Date(s.SubmittedAt).toLocaleDateString() : 'recently'}</p>
+            <div class="admin-card-actions">
+              <button class="btn btn-green btn-sm" onclick="approveSpotlight(${s.ID})">✓ Approve</button>
+              <button class="btn btn-destructive btn-sm" onclick="rejectSpotlight(${s.ID})">✕ Reject</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Render live list
+      const liveList = document.getElementById('liveList');
+      if (approvedSpotlights.length === 0) {
+        liveList.innerHTML = '<p style="font-size: 0.875rem; color: var(--muted-foreground);">No live spotlights.</p>';
+      } else {
+        liveList.innerHTML = approvedSpotlights.map(s => `
+          <div class="admin-card approved">
+            <p class="admin-card-name">${s.Title} <span>· ${s.ManagerTitle}</span></p>
+            <p class="admin-card-details">${s.HighlightedJob} · ${s.JobLocation}</p>
+            <p class="admin-card-quote">"${s.Quote}"</p>
+            <div class="admin-card-footer">
+              <p class="admin-card-date">Expires ${s.ExpiresAt ? new Date(s.ExpiresAt).toLocaleDateString() : 'soon'}</p>
+              <button class="btn btn-destructive btn-sm" onclick="removeSpotlight(${s.ID})">Remove</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Carousel
+    function scrollCarousel(direction) {
+      const approvedSpotlights = allSpotlights.filter(s => {
+        const status = getStatusValue(s.Status);
+        const notExpired = s.ExpiresAt ? new Date(s.ExpiresAt) > new Date() : true;
+        return status === 'approved' && notExpired;
+      });
+      
+      const cardWidth = 276;
+      const maxScroll = Math.max(0, (approvedSpotlights.length - 2) * cardWidth);
+      
+      if (direction === 'left') {
+        carouselPosition = Math.max(0, carouselPosition - cardWidth);
+      } else {
+        carouselPosition = Math.min(maxScroll, carouselPosition + cardWidth);
+      }
+      
+      document.getElementById('spotlightCarousel').style.transform = `translateX(-${carouselPosition}px)`;
+      document.getElementById('carouselLeft').disabled = carouselPosition === 0;
+      document.getElementById('carouselRight').disabled = carouselPosition >= maxScroll;
+    }
+
+    // Modal functions
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Event handlers
+    async function handleSubscribe() {
+      const name = document.getElementById('subName').value;
+      const email = document.getElementById('subEmail').value;
+      const msgEl = document.getElementById('subMessage');
+      
+      if (!email || !email.includes('@')) {
+        msgEl.style.display = 'block';
+        msgEl.className = 'message-box message-error';
+        msgEl.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      
+      const result = await callFlow('subscribe', { name, email });
+      
+      if (result.success) {
+        msgEl.style.display = 'block';
+        msgEl.className = 'message-box message-success';
+        msgEl.textContent = "✅ You're subscribed! Expect your first digest this Monday at 8am.";
+        document.getElementById('subscribeBanner').style.display = 'none';
+        setTimeout(() => {
+          closeModal('subscribeModal');
+          msgEl.style.display = 'none';
+          document.getElementById('subName').value = '';
+          document.getElementById('subEmail').value = '';
+        }, 3000);
+      } else {
+        msgEl.style.display = 'block';
+        msgEl.className = 'message-box message-error';
+        msgEl.textContent = '❌ Subscription failed. Please try again.';
+      }
+    }
+
+    async function handleSpotlightSubmit() {
+      const data = {
+        managerName: document.getElementById('spotName').value,
+        managerTitle: document.getElementById('spotTitle').value,
+        highlightedJob: document.getElementById('spotJob').value,
+        jobLocation: document.getElementById('spotLocation').value,
+        quote: document.getElementById('spotQuote').value,
+        jobLink: document.getElementById('spotLink').value,
+      };
+      
+      const msgEl = document.getElementById('spotMessage');
+      
+      if (!data.managerName || !data.highlightedJob || !data.quote) {
+        msgEl.style.display = 'block';
+        msgEl.className = 'message-box message-error';
+        msgEl.textContent = 'Please fill in your name, job, and quote at minimum.';
+        return;
+      }
+      
+      const result = await callFlow('create', data);
+      
+      if (result.success) {
+        msgEl.style.display = 'block';
+        msgEl.className = 'message-box message-success';
+        msgEl.textContent = '✅ Submitted! An admin will review your spotlight before it goes live.';
+        setTimeout(() => {
+          closeModal('spotlightModal');
+          msgEl.style.display = 'none';
+          document.getElementById('spotName').value = '';
+          document.getElementById('spotTitle').value = '';
+          document.getElementById('spotJob').value = '';
+          document.getElementById('spotLocation').value = '';
+          document.getElementById('spotQuote').value = '';
+          document.getElementById('spotLink').value = '';
+          loadSpotlights();
+        }, 3000);
+      } else {
+        msgEl.style.display = 'block';
+        msgEl.className = 'message-box message-error';
+        msgEl.textContent = '❌ Submission failed. Please try again.';
+      }
+    }
+
+    function handleAdminLogin() {
+      const password = document.getElementById('adminPassword').value;
+      const errorEl = document.getElementById('adminError');
+      
+      if (password === ADMIN_PASSWORD) {
+        closeModal('adminLoginModal');
+        document.getElementById('adminPassword').value = '';
+        errorEl.style.display = 'none';
+        openModal('adminPanelModal');
+      } else {
+        errorEl.style.display = 'block';
+        document.getElementById('adminPassword').value = '';
+      }
+    }
+
+    async function approveSpotlight(id) {
+      const result = await callFlow('approve', { id });
+      if (result.success) {
+        loadSpotlights();
+      }
+    }
+
+    async function rejectSpotlight(id) {
+      const result = await callFlow('reject', { id });
+      if (result.success) {
+        loadSpotlights();
+      }
+    }
+
+    async function removeSpotlight(id) {
+      const result = await callFlow('remove', { id });
+      if (result.success) {
+        loadSpotlights();
+      }
+    }
+
+    // Category filter click handler
+    document.getElementById('categoryFilters').addEventListener('click', (e) => {
+      if (e.target.classList.contains('category-btn')) {
+        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        activeCategory = e.target.dataset.category;
+        renderJobs();
+      }
     });
-    if(parsed.length>=5){
-      JOBS=parsed.slice(0,16);
-      const tm=doc.body.textContent.match(/(\d+)\s*Open\s*Position/i);
-      document.getElementById('totalCount').textContent=tm?tm[1]:JOBS.length+'+';
-      document.getElementById('feedStatus').textContent=`Live feed — ${JOBS.length} most recently posted · refreshed ${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
-    }else throw new Error();
-  }catch(e){
-    JOBS=FALLBACK;
-    document.getElementById('totalCount').textContent='176';
-    document.getElementById('feedStatus').textContent='Showing cached jobs · connect to reyescocacola.com for live data';
-  }
-  filterJobs();
-}
 
-function filterJobs(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const list=document.getElementById('jobList');list.innerHTML='';
-  const filtered=JOBS.filter(j=>(currentFilter==='All'||j.cat===currentFilter)&&(j.title.toLowerCase().includes(q)||j.loc.toLowerCase().includes(q)||j.cat.toLowerCase().includes(q)));
-  if(!filtered.length){list.innerHTML='<p style="font-size:13px;color:var(--text-2);padding:1rem 0;">No roles match your search.</p>';return;}
-  filtered.forEach(j=>{
-    const hot=j.age<=1;const[bg,fg]=catColors[j.cat]||["#F1EFE8","#5F5E5A"];
-    const w=document.createElement('div');w.className='flip'+(hot?' hot':'');
-    w.innerHTML=`<div class="flip-in">
-      <div class="face front">
-        <div>
-          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px;">${ageBadge(j.age)}<span class="pill" style="background:${bg};color:${fg};">${j.cat}</span><span class="pill">${j.loc}</span></div>
-          <p style="font-size:14px;font-weight:500;">${j.title}</p>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <p style="font-size:11px;color:var(--text-3);">Hover for description</p>
-          <a href="https://jobportal.reyesholdings.com/allbusinessunit/jobs/${j.id}?lang=en-us" target="_blank" onclick="event.stopPropagation()"><button class="${hot?'btn red':'btn'} sm">Apply ↗</button></a>
-        </div>
-      </div>
-      <div class="face back">
-        <div>
-          <p style="font-size:12px;font-weight:500;margin-bottom:5px;">${j.title} &nbsp;<span class="pill">${j.loc}</span></p>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.65;">${j.desc}</p>
-        </div>
-        <div style="display:flex;justify-content:flex-end;">
-          <a href="https://jobportal.reyesholdings.com/allbusinessunit/jobs/${j.id}?lang=en-us" target="_blank" onclick="event.stopPropagation()"><button class="${hot?'btn red':'btn'} sm">Apply ↗</button></a>
-        </div>
-      </div>
-    </div>`;
-    w.addEventListener('click',()=>w.classList.toggle('flipped'));
-    list.appendChild(w);
-  });
-  document.getElementById('hotCount').textContent=JOBS.filter(j=>j.age<=1).length;
-}
+    // Search input handler
+    document.getElementById('searchInput').addEventListener('input', () => {
+      renderJobs();
+    });
 
-function setFilter(cat,btn){currentFilter=cat;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');filterJobs();}
+    // Close modal on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('active');
+        }
+      });
+    });
 
-function renderCarousel(){
-  const now=Date.now();const live=approved.filter(s=>Number(s.expires)>now);
-  const sec=document.getElementById('spotSection');const track=document.getElementById('carTrack');
-  if(!live.length){sec.style.display='none';return;}
-  sec.style.display='block';track.innerHTML='';
-  carouselIdx=Math.min(carouselIdx,Math.max(0,live.length-1));
-  live.forEach((s,i)=>{
-    const daysLeft=Math.ceil((Number(s.expires)-now)/(1000*60*60*24));
-    const daysAgo=Math.floor((now-Number(s.approvedAt))/(1000*60*60*24));
-    const[cbg,cfg]=avColors[i%avColors.length];
-    const c=document.createElement('div');c.className='spot-card';
-    c.innerHTML=`<span class="days-left">${daysLeft}d left</span>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-        <div class="avatar" style="width:34px;height:34px;background:${cbg};color:${cfg};">${initials(s.name)}</div>
-        <div><p style="font-size:13px;font-weight:500;">${s.name}</p><p style="font-size:11px;color:var(--text-2);">${s.title||'Hiring Manager'}</p></div>
-      </div>
-      <p style="font-size:12px;font-weight:500;margin-bottom:2px;">${s.job}</p>
-      ${s.location?`<p style="font-size:11px;color:var(--text-2);margin-bottom:6px;">📍 ${s.location}</p>`:''}
-      <p style="font-size:12px;color:var(--text-2);line-height:1.55;font-style:italic;margin-bottom:10px;">"${s.quote}"</p>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <p style="font-size:10px;color:var(--text-3);">Live ${daysAgo===0?'today':daysAgo+'d ago'}</p>
-        ${s.link?`<a href="${s.link}" target="_blank"><button class="btn sm">View job ↗</button></a>`:''}
-      </div>`;
-    track.appendChild(c);
-  });
-  document.getElementById('carTrack').style.transform=`translateX(-${carouselIdx*272}px)`;
-}
-
-function slideCarousel(dir){
-  const max=Math.max(0,approved.filter(s=>Number(s.expires)>Date.now()).length-1);
-  carouselIdx=Math.min(max,Math.max(0,carouselIdx+dir));
-  document.getElementById('carTrack').style.transform=`translateX(-${carouselIdx*272}px)`;
-}
-
-function openSubmitModal(){document.getElementById('submitModal').classList.add('open');}
-function closeSubmitModal(){document.getElementById('submitModal').classList.remove('open');}
-
-async function submitSpotlight(){
-  const name=document.getElementById('mgrName').value.trim();
-  const title=document.getElementById('mgrTitle').value.trim();
-  const job=document.getElementById('mgrJob').value.trim();
-  const location=document.getElementById('mgrLocation').value.trim();
-  const quote=document.getElementById('mgrQuote').value.trim();
-  const link=document.getElementById('mgrLink').value.trim();
-  if(!name||!job||!quote){alert('Please fill in your name, job, and quote at minimum.');return;}
-  const btn=document.getElementById('submitBtn');const msg=document.getElementById('submitMsg');
-  btn.textContent='Submitting...';btn.disabled=true;msg.style.display='none';
-  const ok=await sheetWrite({action:'submit',id:Date.now(),name,title,job,location,quote,link,submittedAt:Date.now()});
-  btn.textContent='Submit for review ↗';btn.disabled=false;
-  if(ok){
-    msg.style.display='block';msg.style.background='var(--green-bg)';msg.style.color='var(--green-text)';
-    msg.textContent='✅ Submitted! An admin will review your spotlight before it goes live.';
-    ['mgrName','mgrTitle','mgrJob','mgrLocation','mgrQuote','mgrLink'].forEach(id=>document.getElementById(id).value='');
-    setTimeout(()=>{closeSubmitModal();msg.style.display='none';},3000);
-  }else{
-    msg.style.display='block';msg.style.background='var(--red-light)';msg.style.color='var(--red-dark)';
-    msg.textContent='❌ Submission failed. Please try again or contact your admin.';
-  }
-}
-
-function openAdminLogin(){document.getElementById('adminLoginModal').classList.add('open');document.getElementById('adminPwd').value='';document.getElementById('pwdError').style.display='none';}
-function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('open');}
-function checkAdminPwd(){
-  if(document.getElementById('adminPwd').value===ADMIN_PASSWORD){closeAdminLogin();openAdmin();}
-  else{document.getElementById('pwdError').style.display='block';document.getElementById('adminPwd').value='';}
-}
-
-async function openAdmin(){
-  document.getElementById('adminModal').classList.add('open');
-  document.getElementById('pendingList').innerHTML='<p style="font-size:13px;color:var(--text-2);"><span class="spinner"></span> Loading...</p>';
-  document.getElementById('liveList').innerHTML='';
-  await loadSpotlights();renderAdmin();
-}
-function closeAdmin(){document.getElementById('adminModal').classList.remove('open');}
-
-function renderAdmin(){
-  const now=Date.now();
-  document.getElementById('pendingBadge').textContent=pending.length?`(${pending.length})`:'';
-  const live=approved.filter(s=>Number(s.expires)>now);
-  document.getElementById('liveBadge').textContent=live.length?`(${live.length})`:'';
-  document.getElementById('pendingList').innerHTML=pending.length
-    ?pending.map(s=>`<div class="pending-card">
-        <p style="font-size:13px;font-weight:500;">${s.name} <span style="font-weight:400;color:var(--text-2);">· ${s.title||'No title'}</span></p>
-        <p style="font-size:12px;color:var(--text-2);margin:3px 0;">${s.job} · ${s.location||'No location'}</p>
-        <p style="font-size:12px;color:var(--text-2);font-style:italic;margin-bottom:6px;">"${s.quote}"</p>
-        <p style="font-size:10px;color:var(--text-3);margin-bottom:8px;">Submitted ${new Date(Number(s.submittedAt)).toLocaleDateString()}</p>
-        <div style="display:flex;gap:6px;">
-          <button class="btn green sm" onclick="approveS('${s.id}')">✓ Approve</button>
-          <button class="btn red sm" onclick="rejectS('${s.id}')">✕ Reject</button>
-        </div>
-      </div>`).join('')
-    :'<p style="font-size:13px;color:var(--text-2);">No pending submissions.</p>';
-  document.getElementById('liveList').innerHTML=live.length
-    ?live.map(s=>`<div class="live-card">
-        <p style="font-size:13px;font-weight:500;">${s.name} <span style="font-weight:400;color:var(--text-2);">· ${s.title||''}</span></p>
-        <p style="font-size:12px;color:var(--text-2);margin:3px 0;">${s.job} · ${s.location||''}</p>
-        <p style="font-size:12px;color:var(--text-2);font-style:italic;margin-bottom:6px;">"${s.quote}"</p>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <p style="font-size:10px;color:var(--text-3);">Expires ${new Date(Number(s.expires)).toLocaleDateString()}</p>
-          <button class="btn red sm" onclick="removeS('${s.id}')">Remove</button>
-        </div>
-      </div>`).join('')
-    :'<p style="font-size:13px;color:var(--text-2);">No live spotlights.</p>';
-}
-
-async function approveS(id){
-  const now=Date.now();
-  await sheetWrite({action:'approve',id,approvedAt:now,expires:now+SEVEN_DAYS});
-  await loadSpotlights();renderAdmin();
-}
-async function rejectS(id){
-  if(!confirm('Reject and delete this submission?'))return;
-  await sheetWrite({action:'reject',id});await loadSpotlights();renderAdmin();
-}
-async function removeS(id){
-  if(!confirm('Remove this live spotlight?'))return;
-  await sheetWrite({action:'remove',id});await loadSpotlights();renderAdmin();
-}
-
-async function init(){await loadSpotlights();await fetchJobs();}
-init();
-</script>
+    // Initialize
+    loadJobs();
+    loadSpotlights();
+  </script>
 </body>
 </html>
