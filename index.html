@@ -645,7 +645,7 @@
     function getStatusValue(s) { return !s ? '' : typeof s === 'string' ? s : s.Value || ''; }
     function getDaysAgo(d) { if (!d) return 0; return Math.floor((new Date() - new Date(d)) / 86400000); }
     function getDaysLeft(d) { if (!d) return 0; return Math.max(0, Math.ceil((new Date(d) - new Date()) / 86400000)); }
-    function isHotJob(j) { return j.IsFeatured === true; }
+    function isHotJob(j) { return j.IsFeatured === yes; }
     function getInitials(n) { return n ? n.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() : '??'; }
 
     async function callFlow(action, data) {
