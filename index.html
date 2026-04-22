@@ -489,24 +489,24 @@
       </div>
     </div>
 
-    <!-- Category Filters -->
-    <div class="category-filters" id="categoryFilters">
-      <button class="category-btn active" data-category="All">All</button>
-      <button class="category-btn" data-category="Administrative">Administrative</button>
-      <button class="category-btn" data-category="Drivers and Transportation">Drivers and Transportation</button>
-      <button class="category-btn" data-category="Finance and Accounting">Finance and Accounting</button>
-      <button class="category-btn" data-category="Human Resources">Human Resources</button>
-      <button class="category-btn" data-category="IT and Technical Support">IT and Technical Support</button>
-      <button class="category-btn" data-category="Maintenance">Maintenance</button>
-      <button class="category-btn" data-category="Manufacturing/Production">Manufacturing/Production</button>
-      <button class="category-btn" data-category="Marketing">Marketing</button>
-      <button class="category-btn" data-category="Operations">Operations</button>
-      <button class="category-btn" data-category="Quality and Engineering">Quality and Engineering</button>
-      <button class="category-btn" data-category=Safety">Safety</button>
-      <button class="category-btn" data-category="Sales">Sales</button>
-       <button class="category-btn" data-category=Transportation">Transportation</button>
-      <button class="category-btn" data-category="Warehouse">Warehouse</button>
-    </div>
+   <!-- Category Filters -->
+<div class="category-filters" id="categoryFilters">
+  <button class="category-btn active" data-category="All">All</button>
+  <button class="category-btn" data-category="Administrative">Administrative</button>
+  <button class="category-btn" data-category="Drivers and Transportation">Drivers and Transportation</button>
+  <button class="category-btn" data-category="Finance and Accounting">Finance and Accounting</button>
+  <button class="category-btn" data-category="Human Resources">Human Resources</button>
+  <button class="category-btn" data-category="IT and Technical Support">IT and Technical Support</button>
+  <button class="category-btn" data-category="Maintenance">Maintenance</button>
+  <button class="category-btn" data-category="Manufacturing/Production">Manufacturing/Production</button>
+  <button class="category-btn" data-category="Marketing">Marketing</button>
+  <button class="category-btn" data-category="Operations">Operations</button>
+  <button class="category-btn" data-category="Quality and Engineering">Quality and Engineering</button>
+  <button class="category-btn" data-category="Safety">Safety</button>
+  <button class="category-btn" data-category="Sales">Sales</button>
+  <button class="category-btn" data-category="Transportation">Transportation</button>
+  <button class="category-btn" data-category="Warehouse">Warehouse</button>
+</div>
 
     <!-- Feed Status -->
     <p class="feed-status" id="feedStatus">Loading live jobs...</p>
@@ -617,7 +617,7 @@
     let carouselPosition = 0;
 
   
-const categoryColors: Record<string, { bg: string; text: string }> = {
+const categoryColors = {
   'Administrative': { bg: '#E6F1FB', text: '#0C447C' },
   'Drivers and Transportation': { bg: '#EEEDFE', text: '#3C3489' },
   'Finance and Accounting': { bg: '#E1F5EE', text: '#085041' },
