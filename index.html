@@ -1238,14 +1238,97 @@
       <div class="admin-section">
         <p class="admin-section-title">Live spotlights <span id="liveCount"></span></p>
         <div id="liveList"><p style="font-size: 0.875rem; color: var(--ink-muted);">No live spotlights.</p></div>
-adminPanelModal')">Close</button>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('adminPanelModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const FLOW_URL = 'https://a477fe69c32a4af79331a1752086c6.34.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/a7e5f0b464f244258bc07b14f9dbaf35/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=7g1H_G2S34bANHFlJ4l7PaJATRlINrELa1D_mJ17ICk';
+    const ADMIN_PASSWORD = 'RCCB123';
+
+    let jobs = [];
+    let allSpotlights = [];
+    let activeCategory = 'All';
+    let carouselPosition = 0;
+
+    const categoryColors = {
+      'Administrative': { bg: '#E6F1FB', text: '#0C447C' },
+      'Drivers and Transportation': { bg: '#EEEDFE', text: '#3C3489' },
+      'Finance and Accounting': { bg: '#E1F5EE', text: '#085041' },
+      'Human Resources': { bg: '#FBEAF0', text: '#72243E' },
+      'IT and Technical Support': { bg: '#FAEEDA', text: '#633806' },
+      'Maintenance': { bg: '#EEEDFE', text: '#3C3489' },
+      'Manufacturing/Production': { bg: '#FCEBEB', text: '#A32D2D' },
+      'Marketing': { bg: '#FAEEDA', text: '#633806' },
+      'Operations': { bg: '#E1F5EE', text: '#085041' },
+      'Quality and Engineering': { bg: '#E6F1FB', text: '#0C447C' },
+      'Safety': { bg: '#FCEBEB', text: '#A32D2D' },
+      'Sales': { bg: '#E1F5EE', text: '#085041' },
+      'Transportation': { bg: '#EEEDFE', text: '#3C3489' },
+      'Warehouse': { bg: '#FBEAF0', text: '#72243E' },
+    };
+
+    const avatarColors = [
+      { bg: '#E6F1FB', text: '#0C447C' },
+      { bg: '#E1F5EE', text: '#085041' },
+      { bg: '#FAEEDA', text: '#633806' },
+      { bg: '#FBEAF0', text: '#72243E' },
+      { bg: '#EEEDFE', text: '#3C3489' },
+    ];
+
+    function getCategoryValue(c) { return !c ? '' : typeof c === 'string' ? c : c.Value || ''; }
+    function getStatusValue(s) { return !s ? '' : typeof s === 'string' ? s : s.Value || ''; }
+    function getDaysAgo(d) { if (!d) return 0; return Math.floor((new Date() - new Date(d)) / 86400000); }
+    function getDaysLeft(d) { if (!d) return 0; return Math.max(0, Math.ceil((new Date(d) - new Date()) / 86400000)); }
+    function isHotJob(j) {
+      const val = j.IsFeatured;
+      if (!val) return false;
       if (typeof val === 'string') return val.toLowerCase() === 'yes';
-totalJobs').textContent = jobs.length;
+      if (val.Value) return val.Value.toLowerCase() === 'yes';
+      return false;
+    }
+    function getInitials(n) { return n ? n.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() : '??'; }
+
+    async function callFlow(action, data) {
+      try {
+        const r = await fetch(FLOW_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action, data }) });
+        const t = await r.text();
+        return t ? JSON.parse(t) : { success: true };
+      } catch (e) { console.error(e); return { success: false }; }
+    }
+
+    async function loadJobs() {
+      const r = await callFlow('getJobs');
+      if (r.success && r.data) { jobs = r.data; renderJobs(); updateStats(); }
+    }
+
+    async function loadSpotlights() {
+      const r = await callFlow('getAll');
+      if (r.success && r.data) { allSpotlights = r.data; renderSpotlights(); renderAdminPanel(); }
+    }
+
+    function updateStats() {
+      document.getElementById('totalJobs').textContent = jobs.length;
       document.getElementById('hotJobs').textContent = jobs.filter(isHotJob).length;
-jobsContainer');
+    }
+
+    function renderJobs() {
+      const c = document.getElementById('jobsContainer');
       const q = document.getElementById('searchInput').value.toLowerCase();
-includes(q) || j.Location?.toLowerCase().includes(q) || cat.toLowerCase().includes(q));
-feedStatus').textContent = `${filtered.length} positions · refreshed ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+      const filtered = jobs.filter(j => {
+        const cat = getCategoryValue(j.Category);
+        return (activeCategory === 'All' || cat === activeCategory) && (!q || j.Title?.toLowerCase().includes(q) || j.Location?.toLowerCase().includes(q) || cat.toLowerCase().includes(q));
+      }).sort((a, b) => {
+        if (isHotJob(a) && !isHotJob(b)) return -1;
+        if (!isHotJob(a) && isHotJob(b)) return 1;
+        return new Date(b.FeaturedDate || 0) - new Date(a.FeaturedDate || 0);
+      });
+
+      document.getElementById('feedStatus').textContent = `${filtered.length} positions · refreshed ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
 
       if (!filtered.length) { c.innerHTML = '<p style="text-align:center;color:var(--ink-muted);padding:2rem;font-style:italic;">No roles match your search.</p>'; return; }
 
@@ -1295,7 +1378,6 @@ feedStatus').textContent = `${filtered.length} positions · refreshed ${new Date
       const approved = allSpotlights.filter(s => getStatusValue(s.Status) === 'approved' && (!s.ExpiresAt || new Date(s.ExpiresAt) > new Date()));
       const max = Math.max(0, (approved.length - 2) * 280);
       carouselPosition = dir === 'left' ? Math.max(0, carouselPosition - 280) : Math.min(max, carouselPosition + 280);
-
       document.getElementById('spotlightCarousel').style.transform = `translateX(-${carouselPosition}px)`;
     }
 
