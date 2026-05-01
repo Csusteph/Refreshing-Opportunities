@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RCCB Internal Opportunities</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,721 +13,308 @@
     }
 
     :root {
-      /* Coca-Cola brand palette */
-      --coke-red: #F40009;
-      --coke-red-deep: #B0000A;
-      --coke-red-dark: #7A0008;
-      --cream: #FBF6EE;
-      --cream-deep: #F2EADC;
-      --paper: #FFFCF6;
-      --ink: #1A1614;
-      --ink-soft: #4A423D;
-      --ink-muted: #837B73;
-      --gold: #C9A24A;
-
-      /* Mapped tokens */
-      --background: var(--cream);
-      --foreground: var(--ink);
-      --card: var(--paper);
-      --card-foreground: var(--ink);
-      --primary: var(--coke-red);
+      --background: #f5f4f1;
+      --foreground: #1a1a18;
+      --card: #ffffff;
+      --card-foreground: #1a1a18;
+      --primary: #E24B4A;
       --primary-foreground: #ffffff;
-      --secondary: var(--cream-deep);
-      --secondary-foreground: var(--ink);
-      --muted: var(--cream-deep);
-      --muted-foreground: var(--ink-muted);
+      --secondary: #eeecea;
+      --secondary-foreground: #1a1a18;
+      --muted: #eeecea;
+      --muted-foreground: #5f5e5a;
       --accent: #3B6D11;
-      --destructive: var(--coke-red-deep);
-      --border: rgba(26, 22, 20, 0.12);
-      --border-strong: rgba(26, 22, 20, 0.22);
-      --radius: 0.75rem;
-      --shadow-sm: 0 1px 2px rgba(122, 0, 8, 0.06), 0 1px 3px rgba(26, 22, 20, 0.05);
-      --shadow-md: 0 4px 12px rgba(122, 0, 8, 0.08), 0 2px 4px rgba(26, 22, 20, 0.06);
-      --shadow-lg: 0 12px 32px rgba(122, 0, 8, 0.14), 0 4px 8px rgba(26, 22, 20, 0.08);
+      --destructive: #A32D2D;
+      --border: rgba(0, 0, 0, 0.11);
+      --radius: 0.625rem;
     }
 
-    /* Vintage paper background with subtle effervescence */
     body {
       font-family: 'DM Sans', system-ui, sans-serif;
       background-color: var(--background);
-      background-image:
-        radial-gradient(circle at 12% 18%, rgba(244, 0, 9, 0.04) 0%, transparent 35%),
-        radial-gradient(circle at 88% 82%, rgba(244, 0, 9, 0.03) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(201, 162, 74, 0.02) 0%, transparent 60%),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='none' stroke='%23F40009' stroke-opacity='0.05' stroke-width='1'><circle cx='30' cy='40' r='3'/><circle cx='110' cy='25' r='2'/><circle cx='75' cy='110' r='4'/><circle cx='140' cy='90' r='2.5'/><circle cx='20' cy='130' r='2'/><circle cx='95' cy='65' r='1.5'/></g></svg>");
       color: var(--foreground);
       line-height: 1.5;
-      padding: 1.25rem 1rem 2.5rem;
-      min-height: 100vh;
+      padding: 1rem;
     }
 
     .container {
-      max-width: 880px;
+      max-width: 800px;
       margin: 0 auto;
-      position: relative;
     }
 
-    .space-y-4 > * + * { margin-top: 1.25rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
     .space-y-3 > * + * { margin-top: 0.75rem; }
 
-    /* === HERO HEADER === */
-    .hero {
-      position: relative;
-      background: linear-gradient(135deg, var(--coke-red) 0%, var(--coke-red-deep) 70%, var(--coke-red-dark) 100%);
-      border-radius: 1.25rem;
-      padding: 2rem 1.75rem 2.5rem;
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      margin-bottom: 0.25rem;
-    }
-
-    /* The iconic Coke "wave" ribbon */
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 25%),
-        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06) 0%, transparent 25%);
-      pointer-events: none;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 28px;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'><path d='M0,20 C150,40 250,0 400,18 C550,36 650,4 800,22 C950,40 1050,8 1200,24 L1200,40 L0,40 Z' fill='%23FBF6EE'/></svg>");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      pointer-events: none;
-    }
-
-    /* Tiny bubbles floating in the hero */
-    .hero-bubbles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.5;
-    }
-    .hero-bubbles span {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.18);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25);
-      animation: bubble-rise 8s ease-in infinite;
-    }
-    .hero-bubbles span:nth-child(1) { width: 8px; height: 8px; left: 8%; bottom: -10px; animation-delay: 0s; animation-duration: 9s; }
-    .hero-bubbles span:nth-child(2) { width: 12px; height: 12px; left: 22%; bottom: -10px; animation-delay: 1.5s; animation-duration: 11s; }
-    .hero-bubbles span:nth-child(3) { width: 6px; height: 6px; left: 38%; bottom: -10px; animation-delay: 3s; animation-duration: 8s; }
-    .hero-bubbles span:nth-child(4) { width: 10px; height: 10px; left: 55%; bottom: -10px; animation-delay: 0.8s; animation-duration: 10s; }
-    .hero-bubbles span:nth-child(5) { width: 7px; height: 7px; left: 72%; bottom: -10px; animation-delay: 2.2s; animation-duration: 9.5s; }
-    .hero-bubbles span:nth-child(6) { width: 14px; height: 14px; left: 88%; bottom: -10px; animation-delay: 4s; animation-duration: 12s; }
-    @keyframes bubble-rise {
-      0% { transform: translateY(0) translateX(0); opacity: 0; }
-      15% { opacity: 0.7; }
-      85% { opacity: 0.4; }
-      100% { transform: translateY(-180px) translateX(20px); opacity: 0; }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
+    /* Header */
+    .header {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 1.25rem;
+      gap: 1rem;
     }
+    .header h1 { font-size: 1.25rem; font-weight: 500; }
+    .header p { font-size: 0.875rem; color: var(--muted-foreground); }
+    .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
 
-    .hero-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(255,255,255,0.85);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .hero-brand-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
-    }
-
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      color: white;
-      line-height: 0.95;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-    .hero h1 .accent {
-      display: block;
-      font-size: 0.55em;
-      letter-spacing: 0.22em;
-      color: rgba(255,255,255,0.85);
-      font-weight: 400;
-      margin-bottom: 0.35em;
-      line-height: 1;
-    }
-
-    .hero p {
-      color: rgba(255,255,255,0.92);
-      font-size: 0.9rem;
-      margin-top: 0.75rem;
-      font-weight: 400;
-      max-width: 420px;
-    }
-    .hero p strong { font-weight: 600; }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.25rem;
-    }
-
-    /* Search inside hero */
+    /* Search */
     .search-wrapper { position: relative; }
     .search-wrapper svg {
       position: absolute;
-      left: 0.85rem;
+      left: 0.75rem;
       top: 50%;
       transform: translateY(-50%);
       width: 1rem;
       height: 1rem;
-      color: var(--ink-muted);
-      z-index: 1;
+      color: var(--muted-foreground);
     }
     .search-input {
-      padding: 0.6rem 0.85rem 0.6rem 2.4rem;
-      border: 1.5px solid rgba(255,255,255,0.4);
-      border-radius: 999px;
+      padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       font-size: 0.875rem;
-      width: 14rem;
-      background: rgba(255,255,255,0.95);
-      font-family: inherit;
-      color: var(--ink);
-      transition: all 0.2s;
+      width: 12rem;
+      background: var(--card);
     }
-    .search-input::placeholder { color: var(--ink-muted); }
-    .search-input:focus {
-      outline: none;
-      border-color: white;
-      background: white;
-      box-shadow: 0 0 0 4px rgba(255,255,255,0.25);
-    }
+    .search-input:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
 
     /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.4rem;
-      padding: 0.6rem 1.1rem;
-      border-radius: 999px;
+      gap: 0.25rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
       font-size: 0.875rem;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
-      border: 1.5px solid transparent;
-      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      transition: all 0.2s;
       text-decoration: none;
-      font-family: inherit;
-      white-space: nowrap;
     }
-    .btn-primary {
-      background: var(--primary);
-      color: var(--primary-foreground);
-      box-shadow: 0 4px 12px rgba(244, 0, 9, 0.3);
-    }
-    .btn-primary:hover {
-      background: var(--coke-red-deep);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(244, 0, 9, 0.4);
-    }
-    .btn-outline {
-      background: var(--paper);
-      border-color: var(--border-strong);
-      color: var(--foreground);
-    }
-    .btn-outline:hover {
-      background: white;
-      border-color: var(--ink-soft);
-      transform: translateY(-1px);
-    }
-    .btn-outline-primary {
-      background: rgba(255,255,255,0.95);
-      border-color: var(--coke-red);
-      color: var(--coke-red);
-    }
-    .btn-outline-primary:hover {
-      background: white;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(244, 0, 9, 0.2);
-    }
-    .btn-sm { padding: 0.35rem 0.85rem; font-size: 0.75rem; }
+    .btn-primary { background: var(--primary); color: var(--primary-foreground); }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-outline { background: transparent; border-color: var(--border); color: var(--foreground); }
+    .btn-outline:hover { background: var(--secondary); }
+    .btn-outline-primary { background: transparent; border-color: var(--primary); color: var(--primary); }
+    .btn-outline-primary:hover { background: rgba(226, 75, 74, 0.1); }
+    .btn-sm { padding: 0.25rem 0.75rem; font-size: 0.75rem; }
     .btn-icon { padding: 0.5rem; border-radius: 50%; }
-    .btn-white { background: white; color: var(--coke-red); border-color: white; }
-    .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+    .btn-white { background: white; color: var(--primary); }
+    .btn-white:hover { background: rgba(255, 255, 255, 0.9); }
     .btn-green { background: #3B6D11; color: white; }
     .btn-green:hover { background: #27500A; }
     .btn-destructive { background: var(--destructive); color: white; }
     .btn-full { width: 100%; }
 
-    /* Hero admin button - subtle */
-    .btn-hero-ghost {
-      background: rgba(255,255,255,0.15);
-      color: white;
-      border-color: rgba(255,255,255,0.3);
-      backdrop-filter: blur(8px);
-    }
-    .btn-hero-ghost:hover {
-      background: rgba(255,255,255,0.25);
-      border-color: rgba(255,255,255,0.5);
-    }
-    .btn-hero-spotlight {
-      background: white;
-      color: var(--coke-red);
-    }
-    .btn-hero-spotlight:hover {
-      background: var(--cream);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-    }
-
-    /* === CARDS === */
+    /* Cards */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.1rem;
-      box-shadow: var(--shadow-sm);
+      padding: 1rem;
     }
-    .card-secondary {
-      background: var(--cream-deep);
-      border-color: rgba(26, 22, 20, 0.08);
-    }
+    .card-secondary { background: var(--secondary); }
 
-    /* === STATS === */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.85rem;
-    }
-    .stat-card {
-      text-align: left;
-      padding: 1rem 1.25rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .stat-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: var(--coke-red);
-    }
-    .stat-card.stat-hot::before { background: linear-gradient(180deg, #FF6B4A 0%, var(--coke-red) 100%); }
-
-    .stat-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.75rem;
-      color: var(--ink-soft);
-      letter-spacing: 0.15em;
-      margin-bottom: 0.35rem;
-      text-transform: uppercase;
-    }
-    .stat-value {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 400;
-      line-height: 1;
-      color: var(--ink);
-      letter-spacing: 0.01em;
-    }
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .stat-card { text-align: center; padding: 0.75rem 1rem; }
+    .stat-label { font-size: 0.75rem; color: var(--muted-foreground); margin-bottom: 0.25rem; }
+    .stat-value { font-size: 1.5rem; font-weight: 500; }
     .stat-value-hot {
-      color: var(--coke-red);
+      color: var(--primary);
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
-    /* === SUBSCRIBE BANNER — THE SHOWSTOPPER === */
+    /* Subscribe Banner */
     .subscribe-banner {
-      position: relative;
-      background:
-        linear-gradient(135deg, var(--coke-red) 0%, var(--coke-red-deep) 100%);
-      border-radius: 1rem;
-      padding: 1.5rem 1.75rem;
-      overflow: hidden;
-      box-shadow:
-        0 12px 30px rgba(244, 0, 9, 0.25),
-        0 4px 8px rgba(122, 0, 8, 0.18),
-        inset 0 1px 0 rgba(255,255,255,0.2);
+      background: linear-gradient(to right, var(--primary), var(--destructive));
+      border-radius: 0.75rem;
+      padding: 1rem;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 1.25rem;
+      gap: 0.75rem;
     }
-    /* Decorative top-left glow on subscribe banner */
-    .subscribe-banner::before {
-      content: "";
-      position: absolute;
-      top: -30px; left: -30px;
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .subscribe-banner::after {
-      content: "";
-      position: absolute;
-      bottom: -40px; right: -40px;
-      width: 140px; height: 140px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
+    .subscribe-banner p { color: white; font-size: 0.875rem; }
+    .subscribe-banner .subtitle { font-size: 0.75rem; opacity: 0.8; }
+    .subscribe-banner .title { font-weight: 500; display: flex; align-items: center; gap: 0.5rem; }
 
-    .sub-content { position: relative; z-index: 2; max-width: 460px; }
-    .sub-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(8px);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.25);
-      margin-bottom: 0.65rem;
-    }
-    .sub-eyebrow .pulse {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: white;
-      animation: pulse-dot 1.5s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 0 6px rgba(255,255,255,0.2); }
-    }
-    .sub-title {
-      font-family: 'Bebas Neue', sans-serif;
-      color: white;
-      font-size: clamp(1.6rem, 3.8vw, 2.1rem);
-      line-height: 1;
-      letter-spacing: 0.02em;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-    .sub-title .accent {
-      display: block;
-      font-size: 0.55em;
-      letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 0.3em;
-      line-height: 1;
-    }
-    .sub-desc {
-      color: rgba(255,255,255,0.95);
-      font-size: 0.9rem;
-      line-height: 1.45;
-      margin-bottom: 0.5rem;
-    }
-    .sub-perks {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      margin-top: 0.35rem;
-    }
-    .sub-perk {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      color: rgba(255,255,255,0.92);
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-    .sub-perk svg { color: white; flex-shrink: 0; }
-
-    .sub-cta-wrap {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .btn-sub {
-      background: white;
-      color: var(--coke-red);
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: 0.08em;
-      font-size: 1.05rem;
-      padding: 0.85rem 1.75rem;
-      border-radius: 999px;
-      border: 2.5px solid white;
-      box-shadow:
-        0 8px 20px rgba(0,0,0,0.2),
-        inset 0 -3px 0 rgba(244,0,9,0.08);
-      animation: btn-pulse 2.5s ease-in-out infinite;
-    }
-    .btn-sub:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow:
-        0 12px 28px rgba(0,0,0,0.28),
-        inset 0 -3px 0 rgba(244,0,9,0.08);
-      animation: none;
-    }
-    @keyframes btn-pulse {
-      0%, 100% { box-shadow: 0 8px 20px rgba(0,0,0,0.2), inset 0 -3px 0 rgba(244,0,9,0.08), 0 0 0 0 rgba(255,255,255,0.5); }
-      50% { box-shadow: 0 8px 20px rgba(0,0,0,0.2), inset 0 -3px 0 rgba(244,0,9,0.08), 0 0 0 10px rgba(255,255,255,0); }
-    }
-    .sub-tag {
-      color: rgba(255,255,255,0.85);
-      font-size: 0.7rem;
-      font-style: italic;
-    }
-
-    /* === BADGES === */
+    /* Badge */
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
     }
-    .badge-hot {
-      background: linear-gradient(135deg, #FCEBEB 0%, #FAD8D8 100%);
-      color: var(--coke-red-dark);
-      border: 1px solid rgba(244, 0, 9, 0.15);
-    }
-    .badge-regular {
-      background: #EAF3DE;
-      color: #27500A;
-      border: 1px solid rgba(59, 109, 17, 0.15);
-    }
-    .badge-secondary {
-      background: var(--cream-deep);
-      color: var(--ink-soft);
-      border: 1px solid rgba(26, 22, 20, 0.08);
+    .badge-hot { background: #FCEBEB; color: #A32D2D; }
+    .badge-regular { background: #EAF3DE; color: #27500A; }
+    .badge-secondary { background: var(--secondary); color: var(--secondary-foreground); }
+
+    /* Flame Animation - Dynamic Fire Effect */
+    @keyframes flame-dance {
+      0%, 100% {
+        transform: scale(1) rotate(0deg) translateY(0);
+        filter: brightness(1) drop-shadow(0 0 2px #E24B4A);
+      }
+      10% {
+        transform: scale(1.05) rotate(-2deg) translateY(-1px);
+      }
+      20% {
+        transform: scale(1.1) rotate(1deg) translateY(-2px);
+        filter: brightness(1.2) drop-shadow(0 0 6px #FF6B4A);
+      }
+      30% {
+        transform: scale(1.05) rotate(-1deg) translateY(-1px);
+      }
+      40% {
+        transform: scale(1.15) rotate(2deg) translateY(-2px);
+        filter: brightness(1.3) drop-shadow(0 0 8px #FF8C4A);
+      }
+      50% {
+        transform: scale(1.1) rotate(0deg) translateY(-1px);
+        filter: brightness(1.15) drop-shadow(0 0 5px #E24B4A);
+      }
+      60% {
+        transform: scale(1.2) rotate(-2deg) translateY(-3px);
+        filter: brightness(1.35) drop-shadow(0 0 10px #FF6B4A);
+      }
+      70% {
+        transform: scale(1.1) rotate(1deg) translateY(-2px);
+      }
+      80% {
+        transform: scale(1.05) rotate(-1deg) translateY(-1px);
+        filter: brightness(1.1) drop-shadow(0 0 4px #E24B4A);
+      }
+      90% {
+        transform: scale(1.1) rotate(2deg) translateY(-2px);
+        filter: brightness(1.25) drop-shadow(0 0 7px #FF6B4A);
+      }
     }
 
-    /* === FLAME ANIMATION === */
-    @keyframes flame-dance {
-      0%, 100% { transform: scale(1) rotate(0deg) translateY(0); filter: brightness(1) drop-shadow(0 0 2px #E24B4A); }
-      10% { transform: scale(1.05) rotate(-2deg) translateY(-1px); }
-      20% { transform: scale(1.1) rotate(1deg) translateY(-2px); filter: brightness(1.2) drop-shadow(0 0 6px #FF6B4A); }
-      30% { transform: scale(1.05) rotate(-1deg) translateY(-1px); }
-      40% { transform: scale(1.15) rotate(2deg) translateY(-2px); filter: brightness(1.3) drop-shadow(0 0 8px #FF8C4A); }
-      50% { transform: scale(1.1) rotate(0deg) translateY(-1px); filter: brightness(1.15) drop-shadow(0 0 5px #E24B4A); }
-      60% { transform: scale(1.2) rotate(-2deg) translateY(-3px); filter: brightness(1.35) drop-shadow(0 0 10px #FF6B4A); }
-      70% { transform: scale(1.1) rotate(1deg) translateY(-2px); }
-      80% { transform: scale(1.05) rotate(-1deg) translateY(-1px); filter: brightness(1.1) drop-shadow(0 0 4px #E24B4A); }
-      90% { transform: scale(1.1) rotate(2deg) translateY(-2px); filter: brightness(1.25) drop-shadow(0 0 7px #FF6B4A); }
-    }
     @keyframes flame-glow {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.4); }
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.4);
+      }
     }
+
     .flame-container {
       position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
     }
+
     .flame-glow {
       position: absolute;
       inset: -4px;
-      background: radial-gradient(circle, rgba(244, 0, 9, 0.4) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(226, 75, 74, 0.4) 0%, transparent 70%);
       border-radius: 50%;
       animation: flame-glow 1.2s ease-in-out infinite;
       pointer-events: none;
     }
+
     .flame-icon {
       animation: flame-dance 0.8s ease-in-out infinite;
       transform-origin: center bottom;
     }
 
-    /* === SECTION DIVIDER (Coca-Cola wave) === */
-    .section-rule {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--ink-soft);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.18em;
-      margin: 0.5rem 0 0.25rem;
-    }
-    .section-rule::before,
-    .section-rule::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
-    }
-    .section-rule .dot {
-      width: 6px; height: 6px;
-      background: var(--coke-red);
-      border-radius: 50%;
-      box-shadow: 0 0 0 3px rgba(244, 0, 9, 0.15);
-    }
-
-    /* === CATEGORY FILTERS === */
-    .category-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      padding: 0.25rem 0;
-    }
+    /* Category Filters */
+    .category-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .category-btn {
-      padding: 0.45rem 0.85rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 500;
+      padding: 0.375rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
       cursor: pointer;
-      border: 1.5px solid transparent;
-      background: var(--paper);
-      color: var(--ink-soft);
-      font-family: inherit;
-      transition: all 0.2s;
-      box-shadow: var(--shadow-sm);
+      border: 1px solid transparent;
+      background: var(--secondary);
+      color: var(--muted-foreground);
     }
-    .category-btn:hover {
-      background: white;
-      color: var(--ink);
-      transform: translateY(-1px);
-    }
+    .category-btn:hover { background: #e5e3e0; }
     .category-btn.active {
-      background: var(--coke-red);
-      color: white;
-      border-color: var(--coke-red);
-      font-weight: 600;
-      box-shadow: 0 4px 10px rgba(244, 0, 9, 0.25);
+      background: var(--card);
+      border-color: var(--border);
+      font-weight: 500;
+      color: var(--foreground);
     }
 
-    /* === FEED STATUS === */
-    .feed-status {
-      font-size: 0.78rem;
-      color: var(--ink-muted);
-      font-style: italic;
-      padding-left: 0.25rem;
-    }
+    /* Feed Status */
+    .feed-status { font-size: 0.75rem; color: var(--muted-foreground); }
 
-    /* === SPOTLIGHT CAROUSEL === */
-    .carousel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.25rem;
-    }
-    .carousel-header .title-group {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-    }
-    .carousel-header .label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.18em;
-      color: var(--ink);
+    /* Carousel */
+    .carousel-header { display: flex; justify-content: space-between; align-items: center; }
+    .carousel-header p {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted-foreground);
       text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    .carousel-header .label-accent {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.18em;
-      color: var(--coke-red);
-      text-transform: uppercase;
-      margin-right: 0.1em;
-    }
-    .carousel-nav { display: flex; gap: 0.4rem; }
+    .carousel-nav { display: flex; gap: 0.5rem; }
     .carousel-container { overflow: hidden; }
-    .carousel-track { display: flex; gap: 0.85rem; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+    .carousel-track { display: flex; gap: 0.75rem; transition: transform 0.3s ease-out; }
 
     .spotlight-card {
-      min-width: 268px;
-      max-width: 268px;
-      padding: 1.1rem;
+      min-width: 264px;
+      max-width: 264px;
+      padding: 1rem;
       position: relative;
       flex-shrink: 0;
-      border-top: 3px solid var(--coke-red);
-      background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
     }
-    .spotlight-card .badge {
-      position: absolute;
-      top: 0.6rem;
-      right: 0.6rem;
-      font-size: 0.6rem;
-    }
-    .spotlight-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem; }
+    .spotlight-card .badge { position: absolute; top: 0.5rem; right: 0.5rem; font-size: 0.625rem; }
+    .spotlight-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
     .avatar {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2.25rem;
+      height: 2.25rem;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.08);
+      font-size: 0.75rem;
+      font-weight: 500;
     }
-    .spotlight-name { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
-    .spotlight-title { font-size: 0.72rem; color: var(--ink-muted); }
-    .spotlight-job {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.02em;
-      line-height: 1.15;
-      color: var(--ink);
-      margin-bottom: 0.35rem;
-    }
+    .spotlight-name { font-size: 0.875rem; font-weight: 500; }
+    .spotlight-title { font-size: 0.75rem; color: var(--muted-foreground); }
+    .spotlight-job { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
     .spotlight-location {
-      font-size: 0.72rem;
-      color: var(--ink-muted);
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
       display: flex;
       align-items: center;
       gap: 0.25rem;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
     .spotlight-quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.85rem;
-      color: var(--ink-soft);
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
       font-style: italic;
-      line-height: 1.45;
-      margin-bottom: 0.85rem;
-      position: relative;
-      padding-left: 0.6rem;
-      border-left: 2px solid var(--coke-red);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
     }
     .spotlight-footer { display: flex; justify-content: space-between; align-items: center; }
-    .spotlight-footer span { font-size: 0.65rem; color: var(--ink-muted); letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; }
+    .spotlight-footer span { font-size: 0.625rem; color: var(--muted-foreground); }
 
-    /* === FLIP CARDS === */
-    .flip-card { perspective: 1200px; cursor: pointer; height: 158px; }
+    /* Flip Cards */
+    .flip-card { perspective: 1000px; cursor: pointer; height: 152px; }
     .flip-card-inner {
       position: relative;
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.6s ease;
     }
     .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
     .flip-card-face {
@@ -741,370 +326,160 @@
       border-radius: var(--radius);
       background: var(--card);
       border: 1px solid var(--border);
-      padding: 1.1rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     }
     .flip-card-front { z-index: 2; }
-    .flip-card-back {
-      transform: rotateY(180deg);
-      background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
-    }
-    .flip-card.hot .flip-card-face {
-      border-left: 3px solid var(--coke-red);
-      background: linear-gradient(135deg, var(--paper) 0%, #FFFAF7 100%);
-    }
-    .flip-card.hot .flip-card-face::before {
-      content: "";
-      position: absolute;
-      top: 0; right: 0;
-      width: 60px; height: 60px;
-      background: radial-gradient(circle at top right, rgba(244, 0, 9, 0.06), transparent 70%);
-      pointer-events: none;
-      border-radius: 0 var(--radius) 0 0;
-    }
-    .flip-card:hover .flip-card-face {
-      box-shadow: var(--shadow-lg);
-    }
-    .job-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
-    .job-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.3;
-    }
+    .flip-card-back { transform: rotateY(180deg); }
+    .flip-card.hot .flip-card-face { border-left: 3px solid var(--primary); }
+    .flip-card:hover .flip-card-face { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); }
+    .job-badges { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 0.5rem; }
+    .job-title { font-size: 0.875rem; font-weight: 500; }
     .job-footer { display: flex; justify-content: space-between; align-items: center; }
-    .job-footer span {
-      font-size: 0.7rem;
-      color: var(--ink-muted);
-      font-style: italic;
-    }
-    .job-description {
-      font-size: 0.78rem;
-      color: var(--ink-soft);
-      line-height: 1.55;
-      max-height: 90px;
-      overflow: hidden;
-    }
+    .job-footer span { font-size: 0.75rem; color: var(--muted-foreground); }
+    .job-description { font-size: 0.75rem; color: var(--muted-foreground); line-height: 1.5; }
 
-    /* === REFERRAL BAR === */
-    .referral-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.85rem;
-    }
-    .referral-bar .title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--ink);
-    }
-    .referral-bar .title svg { color: var(--coke-red); }
-    .referral-bar .subtitle {
-      font-size: 0.78rem;
-      color: var(--ink-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      margin-top: 0.2rem;
-      font-style: italic;
-    }
-    .referral-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
-      margin: 1rem 0;
-    }
+    /* Referral Bar */
+    .referral-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; }
+    .referral-bar .title { font-size: 0.875rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; }
+    .referral-bar .subtitle { font-size: 0.75rem; color: var(--muted-foreground); display: flex; align-items: center; gap: 0.25rem; }
+    .referral-divider { height: 1px; background: var(--border); margin: 1rem 0; }
 
-    /* === FOOTER FLOURISH === */
-    .footer-flourish {
-      text-align: center;
-      padding: 1.5rem 0 0.5rem;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.25em;
-      color: var(--coke-red);
-      opacity: 0.85;
-    }
-    .footer-flourish small {
-      display: block;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--ink-muted);
-      text-transform: uppercase;
-      margin-top: 0.4rem;
-      font-weight: 500;
-    }
-
-    /* === MODAL === */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(26, 22, 20, 0.6);
-      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.5);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      padding: 1rem;
     }
-    .modal-overlay.active { display: flex; animation: fade-in 0.2s ease; }
-    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    .modal-overlay.active { display: flex; }
     .modal {
-      background: var(--paper);
-      border-radius: 1rem;
-      padding: 1.75rem;
-      max-width: 440px;
-      width: 100%;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      max-width: 400px;
+      width: 90%;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-      border-top: 4px solid var(--coke-red);
-      animation: modal-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    @keyframes modal-pop {
-      from { opacity: 0; transform: translateY(20px) scale(0.96); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .modal-lg { max-width: 540px; }
-    .modal h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.55rem;
-      letter-spacing: 0.03em;
-      margin-bottom: 0.25rem;
-      color: var(--ink);
-    }
-    .modal h2 .accent {
-      display: block;
-      font-size: 0.6em;
-      letter-spacing: 0.2em;
-      color: var(--coke-red);
-      margin-bottom: 0.2em;
-      line-height: 1;
-    }
-    .modal .description {
-      font-size: 0.88rem;
-      color: var(--ink-muted);
-      margin-bottom: 1.1rem;
-    }
+    .modal-lg { max-width: 500px; }
+    .modal h2 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .modal .description { font-size: 0.875rem; color: var(--muted-foreground); margin-bottom: 1rem; }
     .modal input, .modal textarea {
       width: 100%;
-      padding: 0.65rem 0.85rem;
-      border: 1.5px solid var(--border);
-      border-radius: 0.55rem;
-      font-size: 0.9rem;
-      margin-bottom: 0.65rem;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
       font-family: inherit;
-      background: white;
-      color: var(--ink);
-      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .modal input:focus, .modal textarea:focus {
-      outline: none;
-      border-color: var(--coke-red);
-      box-shadow: 0 0 0 3px rgba(244, 0, 9, 0.12);
-    }
-    .modal-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    .modal .note {
-      font-size: 0.7rem;
-      color: var(--ink-muted);
-      text-align: center;
-      margin-top: 0.85rem;
-      font-style: italic;
-    }
+    .modal input:focus, .modal textarea:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+    .modal-footer { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem; }
+    .modal .note { font-size: 0.625rem; color: var(--muted-foreground); text-align: center; margin-top: 0.75rem; }
     .info-box {
       background: #FAEEDA;
       color: #633806;
-      font-size: 0.78rem;
-      padding: 0.85rem;
-      border-radius: 0.55rem;
-      line-height: 1.55;
-      margin-bottom: 0.85rem;
-      border-left: 3px solid #C9A24A;
+      font-size: 0.75rem;
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
     }
-    .message-box {
-      padding: 0.6rem 0.75rem;
-      border-radius: 0.55rem;
-      font-size: 0.8rem;
-      margin-bottom: 0.85rem;
-      display: none;
-      font-weight: 500;
-    }
-    .message-success {
-      background: #EAF3DE;
-      color: #27500A;
-      border-left: 3px solid #3B6D11;
-    }
-    .message-error {
-      background: #FCEBEB;
-      color: var(--coke-red-dark);
-      border-left: 3px solid var(--coke-red);
-    }
+    .message-box { padding: 0.5rem; border-radius: var(--radius); font-size: 0.75rem; margin-bottom: 0.75rem; display: none; }
+    .message-success { background: #EAF3DE; color: #27500A; }
+    .message-error { background: #FCEBEB; color: #A32D2D; }
 
-    /* === ADMIN === */
+    /* Admin */
     .admin-section { margin-bottom: 1rem; }
-    .admin-section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      color: var(--ink-soft);
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    .admin-card {
-      background: var(--cream-deep);
-      border-radius: 0.55rem;
-      padding: 0.85rem;
-      margin-bottom: 0.5rem;
-      border-left: 3px solid #BA7517;
-    }
+    .admin-section-title { font-size: 0.75rem; font-weight: 500; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .admin-card { background: var(--secondary); border-radius: var(--radius); padding: 0.75rem; margin-bottom: 0.5rem; border-left: 3px solid #BA7517; }
     .admin-card.approved { border-left-color: #3B6D11; }
-    .admin-card-name { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
-    .admin-card-name span { font-weight: 400; color: var(--ink-muted); }
-    .admin-card-details { font-size: 0.78rem; color: var(--ink-muted); margin: 0.25rem 0; }
-    .admin-card-quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.78rem;
-      color: var(--ink-soft);
-      font-style: italic;
-      margin-bottom: 0.5rem;
-    }
-    .admin-card-date { font-size: 0.65rem; color: var(--ink-muted); margin-bottom: 0.5rem; }
+    .admin-card-name { font-size: 0.875rem; font-weight: 500; }
+    .admin-card-name span { font-weight: 400; color: var(--muted-foreground); }
+    .admin-card-details { font-size: 0.75rem; color: var(--muted-foreground); margin: 0.25rem 0; }
+    .admin-card-quote { font-size: 0.75rem; color: var(--muted-foreground); font-style: italic; margin-bottom: 0.5rem; }
+    .admin-card-date { font-size: 0.625rem; color: var(--muted-foreground); margin-bottom: 0.5rem; }
     .admin-card-actions { display: flex; gap: 0.5rem; }
     .admin-card-footer { display: flex; justify-content: space-between; align-items: center; }
     .divider { height: 1px; background: var(--border); margin: 1rem 0; }
 
-    /* === RESPONSIVE === */
     @media (max-width: 640px) {
-      body { padding: 0.75rem 0.75rem 2rem; }
-      .hero { padding: 1.5rem 1.25rem 2rem; }
-      .hero-content { flex-direction: column; }
-      .search-input { width: 100%; }
-      .hero-actions { width: 100%; flex-wrap: wrap; }
-      .subscribe-banner { flex-direction: column; align-items: stretch; padding: 1.4rem 1.25rem; }
-      .subscribe-banner::before { right: -75px; width: 140px; height: 140px; opacity: 0.6; }
-      .sub-cta-wrap { width: 100%; }
-      .btn-sub { width: 100%; }
+      .header { flex-direction: column; }
+      .subscribe-banner { flex-direction: column; align-items: stretch; }
       .referral-bar { flex-direction: column; align-items: stretch; }
-      .stats-grid { gap: 0.6rem; }
-      .stat-value { font-size: 2rem; }
-      .footer-flourish { font-size: 1.3rem; }
     }
   </style>
 </head>
 <body>
   <div class="container space-y-4">
-
-    <!-- === HERO HEADER === -->
-    <div class="hero">
-      <div class="hero-bubbles">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <h1>Refreshing opportunities</h1>
+        <p>Reyes Coca-Cola Bottling · internal careers</p>
       </div>
-      <div class="hero-content">
-        <div>
-          <div class="hero-brand">
-            <span class="hero-brand-dot"></span>
-            Reyes Coca-Cola Bottling
-          </div>
-          <h1><span class="accent">REFRESHING</span>OPPORTUNITIES</h1>
-          <p>Internal careers board · <strong>fresh roles, daily.</strong></p>
+      <div class="header-actions">
+        <div class="search-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input type="text" class="search-input" placeholder="Search roles or locations..." id="searchInput">
         </div>
-        <div class="hero-actions">
-          <div class="search-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-            <input type="text" class="search-input" placeholder="Search roles or locations..." id="searchInput">
-          </div>
-          <button class="btn btn-hero-spotlight" onclick="openModal('spotlightModal')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
-            Manager spotlight
-          </button>
-          <button class="btn btn-hero-ghost btn-sm" onclick="openModal('adminLoginModal')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            Admin
-          </button>
-        </div>
+        <button class="btn btn-outline-primary" onclick="openModal('spotlightModal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+          Manager spotlight
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="openModal('adminLoginModal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          Admin
+        </button>
       </div>
     </div>
 
-    <!-- === STATS === -->
+    <!-- Stats -->
     <div class="stats-grid">
       <div class="card stat-card">
         <p class="stat-label">Featured jobs</p>
         <p class="stat-value" id="totalJobs">0</p>
       </div>
-      <div class="card stat-card stat-hot">
+      <div class="card stat-card">
         <p class="stat-label">Hot jobs</p>
         <p class="stat-value stat-value-hot">
           <span class="flame-container">
             <span class="flame-glow"></span>
-            <svg class="flame-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#F40009" stroke="#F40009" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+            <svg class="flame-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#E24B4A" stroke="#E24B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
           </span>
           <span id="hotJobs">0</span>
         </p>
       </div>
     </div>
 
-    <!-- === SUBSCRIBE BANNER === -->
+    <!-- Subscribe Banner -->
     <div class="subscribe-banner" id="subscribeBanner">
-      <div class="sub-content">
-        <span class="sub-eyebrow">
-          <span class="pulse"></span>
-          Free · Weekly · One-click unsubscribe
-        </span>
-        <h2 class="sub-title">
-          <span class="accent">HOT JOBS —</span>STRAIGHT TO YOUR INBOX
-        </h2>
-        <p class="sub-desc">
-          The top 5 freshest RCCB roles, delivered every Monday at 8am. Be the first to see openings before they fill up.
+      <div>
+        <p class="title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          Get the Monday morning hot jobs digest
         </p>
-        <div class="sub-perks">
-          <span class="sub-perk">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            See jobs first
-          </span>
-          <span class="sub-perk">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Any email works
-          </span>
-          <span class="sub-perk">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Takes 10 seconds
-          </span>
-        </div>
+        <p class="subtitle">Top freshest RCCB roles delivered to your inbox every week</p>
       </div>
-      <div class="sub-cta-wrap">
-        <button class="btn btn-sub" onclick="openModal('subscribeModal')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-          Sign me up
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-        </button>
-        <span class="sub-tag">It only takes a sec.</span>
-      </div>
+      <button class="btn btn-white" onclick="openModal('subscribeModal')">Subscribe</button>
     </div>
 
-    <!-- === SPOTLIGHT CAROUSEL === -->
+    <!-- Spotlight Carousel -->
     <div class="space-y-3" id="spotlightSection" style="display: none;">
       <div class="carousel-header">
-        <div class="title-group">
-          <span class="label-accent">MANAGER</span>
-          <span class="label">SPOTLIGHT</span>
-        </div>
+        <p>Manager spotlight</p>
         <div class="carousel-nav">
-          <button class="btn btn-outline btn-icon" onclick="scrollCarousel('left')" id="carouselLeft" aria-label="Previous">
+          <button class="btn btn-outline btn-icon" onclick="scrollCarousel('left')" id="carouselLeft">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
           </button>
-          <button class="btn btn-outline btn-icon" onclick="scrollCarousel('right')" id="carouselRight" aria-label="Next">
+          <button class="btn btn-outline btn-icon" onclick="scrollCarousel('right')" id="carouselRight">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
         </div>
@@ -1114,14 +489,7 @@
       </div>
     </div>
 
-    <!-- === SECTION RULE === -->
-    <div class="section-rule">
-      <span class="dot"></span>
-      <span>BROWSE BY DEPARTMENT</span>
-      <span class="dot"></span>
-    </div>
-
-    <!-- === CATEGORY FILTERS === -->
+    <!-- Category Filters -->
     <div class="category-filters" id="categoryFilters">
       <button class="category-btn active" data-category="All">All</button>
       <button class="category-btn" data-category="Administrative">Administrative</button>
@@ -1140,58 +508,52 @@
       <button class="category-btn" data-category="Warehouse">Warehouse</button>
     </div>
 
-    <!-- === FEED STATUS === -->
+    <!-- Feed Status -->
     <p class="feed-status" id="feedStatus">Loading live jobs...</p>
 
-    <!-- === JOB CARDS === -->
+    <!-- Job Cards -->
     <div class="space-y-3" id="jobsContainer"></div>
 
-    <!-- === REFERRAL BAR === -->
-    <div class="card card-secondary">
-      <div class="referral-bar">
-        <div>
-          <p class="title">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            Know someone great? Refer them.
-          </p>
-          <p class="subtitle">
-            The best hires often come from people already on the team.
-          </p>
-        </div>
-        <a href="https://jobportal.reyescocacola.com/rccb/jobs?lang=en-US" target="_blank" rel="noopener noreferrer" class="btn btn-outline">External Careers Page</a>
-      </div>
-      <div class="referral-divider"></div>
-      <a href="https://internal-reyesholdings.icims.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-        Browse all current internal job opportunities
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
-      </a>
+     <!-- Referral Bar -->
+<div class="card card-secondary">
+  <div class="referral-bar">
+    <div>
+      <p class="title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        Know someone great? Refer them.
+      </p>
+      <p class="subtitle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        The best hires often come from people already on the team.
+      </p>
     </div>
-
-    <!-- === FOOTER FLOURISH === -->
-    <div class="footer-flourish">
-      ALWAYS REFRESHING.
-      <small>Reyes Coca-Cola Bottling</small>
-    </div>
+   <a href="https://jobportal.reyescocacola.com/rccb/jobs?lang=en-US" target="_blank" rel="noopener noreferrer" class="btn btn-outline">External Careers Page</a>
   </div>
+  <div class="referral-divider"></div>
+  <a href="https://internal-reyesholdings.icims.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+    Browse all current internal job opportunities
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg>
+  </a>
+</div>
 
-  <!-- === SUBSCRIBE MODAL === -->
+  <!-- Subscribe Modal -->
   <div class="modal-overlay" id="subscribeModal">
     <div class="modal">
-      <h2><span class="accent">HOT JOBS —</span>WEEKLY DIGEST</h2>
-      <p class="description">Every Monday at 8am — top 5 freshest RCCB roles delivered to your inbox.</p>
+      <h2>Get the weekly hot jobs digest</h2>
+      <p class="description">Every Monday at 8am — top 5 freshest RCCB roles</p>
       <input type="text" placeholder="Your name (e.g. Maria Garcia)" id="subName">
-      <input type="email" placeholder="Your email address" id="subEmail">
+      <input type="email" placeholder="Your work email address" id="subEmail">
       <div class="message-box" id="subMessage"></div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="closeModal('subscribeModal')">Cancel</button>
-        <button class="btn btn-primary" onclick="handleSubscribe()">Subscribe me</button>
+        <button class="btn btn-primary" onclick="handleSubscribe()">Subscribe</button>
       </div>
-      <p class="note">Personal or work email — both work. Unsubscribe any time with one click.</p>
+      <p class="note">Unsubscribe any time — one click in every email</p>
     </div>
   </div>
 
-  <!-- === SPOTLIGHT MODAL === -->
+  <!-- Spotlight Modal -->
   <div class="modal-overlay" id="spotlightModal">
     <div class="modal">
       <h2>Submit a manager spotlight</h2>
@@ -1211,7 +573,7 @@
     </div>
   </div>
 
-  <!-- === ADMIN LOGIN MODAL === -->
+  <!-- Admin Login Modal -->
   <div class="modal-overlay" id="adminLoginModal">
     <div class="modal">
       <h2>Admin access</h2>
@@ -1225,19 +587,19 @@
     </div>
   </div>
 
-  <!-- === ADMIN PANEL MODAL === -->
+  <!-- Admin Panel Modal -->
   <div class="modal-overlay" id="adminPanelModal">
     <div class="modal modal-lg">
       <h2>Admin panel</h2>
       <p class="description">Approve, reject, or remove manager spotlights</p>
       <div class="admin-section">
         <p class="admin-section-title">Pending review <span id="pendingCount"></span></p>
-        <div id="pendingList"><p style="font-size: 0.875rem; color: var(--ink-muted);">No pending submissions.</p></div>
+        <div id="pendingList"><p style="font-size: 0.875rem; color: var(--muted-foreground);">No pending submissions.</p></div>
       </div>
       <div class="divider"></div>
       <div class="admin-section">
         <p class="admin-section-title">Live spotlights <span id="liveCount"></span></p>
-        <div id="liveList"><p style="font-size: 0.875rem; color: var(--ink-muted);">No live spotlights.</p></div>
+        <div id="liveList"><p style="font-size: 0.875rem; color: var(--muted-foreground);">No live spotlights.</p></div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="closeModal('adminPanelModal')">Close</button>
@@ -1284,12 +646,14 @@
     function getDaysAgo(d) { if (!d) return 0; return Math.floor((new Date() - new Date(d)) / 86400000); }
     function getDaysLeft(d) { if (!d) return 0; return Math.max(0, Math.ceil((new Date(d) - new Date()) / 86400000)); }
     function isHotJob(j) {
-      const val = j.IsFeatured;
-      if (!val) return false;
-      if (typeof val === 'string') return val.toLowerCase() === 'yes';
-      if (val.Value) return val.Value.toLowerCase() === 'yes';
-      return false;
-    }
+  const val = j.IsFeatured;
+  if (!val) return false;
+  // Handle string value
+  if (typeof val === 'string') return val.toLowerCase() === 'yes';
+  // Handle object with Value property (SharePoint choice format)
+  if (val.Value) return val.Value.toLowerCase() === 'yes';
+  return false;
+}
     function getInitials(n) { return n ? n.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() : '??'; }
 
     async function callFlow(action, data) {
@@ -1318,7 +682,7 @@
     function renderJobs() {
       const c = document.getElementById('jobsContainer');
       const q = document.getElementById('searchInput').value.toLowerCase();
-
+     
       const filtered = jobs.filter(j => {
         const cat = getCategoryValue(j.Category);
         return (activeCategory === 'All' || cat === activeCategory) && (!q || j.Title?.toLowerCase().includes(q) || j.Location?.toLowerCase().includes(q) || cat.toLowerCase().includes(q));
@@ -1330,21 +694,21 @@
 
       document.getElementById('feedStatus').textContent = `${filtered.length} positions · refreshed ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
 
-      if (!filtered.length) { c.innerHTML = '<p style="text-align:center;color:var(--ink-muted);padding:2rem;font-style:italic;">No roles match your search.</p>'; return; }
+      if (!filtered.length) { c.innerHTML = '<p style="text-align:center;color:var(--muted-foreground);padding:2rem;">No roles match your search.</p>'; return; }
 
       c.innerHTML = filtered.map(j => {
         const hot = isHotJob(j);
         const cat = getCategoryValue(j.Category);
         const cc = categoryColors[cat] || { bg: '#F1EFE8', text: '#5F5E5A' };
         const days = getDaysAgo(j.FeaturedDate);
-
+       
         let badge;
         if (days === 0) badge = `<span class="badge badge-hot">Today</span>`;
         else if (days === 1) badge = `<span class="badge badge-hot">Yesterday</span>`;
         else if (hot) badge = `<span class="badge badge-hot">${days} days ago</span>`;
         else badge = `<span class="badge badge-regular">${days} days ago</span>`;
 
-        return `<div class="flip-card ${hot ? 'hot' : ''}"><div class="flip-card-inner"><div class="flip-card-face flip-card-front"><div><div class="job-badges">${badge}<span class="badge" style="background:${cc.bg};color:${cc.text};">${cat}</span><span class="badge badge-secondary">${j.Location || ''}</span></div><p class="job-title">${j.Title || ''}</p></div><div class="job-footer"><span>Hover to view description</span><a href="${j.JobPortalLink || '#'}" target="_blank" class="btn ${hot ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="event.stopPropagation();">Apply <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg></a></div></div><div class="flip-card-face flip-card-back"><div><p class="job-title" style="margin-bottom:0.5rem;">${j.Title || ''} <span class="badge badge-secondary" style="font-size:0.625rem;">${j.Location || ''}</span></p><p class="job-description">${j.Description || ''}</p></div><div style="display:flex;justify-content:flex-end;"><a href="${j.JobPortalLink || '#'}" target="_blank" class="btn ${hot ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="event.stopPropagation();">Apply <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg></a></div></div></div></div>`;
+        return `<div class="flip-card ${hot ? 'hot' : ''}"><div class="flip-card-inner"><div class="flip-card-face flip-card-front"><div><div class="job-badges">${badge}<span class="badge" style="background:${cc.bg};color:${cc.text};">${cat}</span><span class="badge badge-secondary">${j.Location || ''}</span></div><p class="job-title">${j.Title || ''}</p></div><div class="job-footer"><span>Hover to view job description</span><a href="${j.JobPortalLink || '#'}" target="_blank" class="btn ${hot ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="event.stopPropagation();">Apply <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg></a></div></div><div class="flip-card-face flip-card-back"><div><p class="job-title" style="margin-bottom:0.5rem;">${j.Title || ''} <span class="badge badge-secondary" style="font-size:0.625rem;">${j.Location || ''}</span></p><p class="job-description">${j.Description || ''}</p></div><div style="display:flex;justify-content:flex-end;"><a href="${j.JobPortalLink || '#'}" target="_blank" class="btn ${hot ? 'btn-primary' : 'btn-outline'} btn-sm" onclick="event.stopPropagation();">Apply <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg></a></div></div></div></div>`;
       }).join('');
     }
 
@@ -1352,10 +716,10 @@
       const sec = document.getElementById('spotlightSection');
       const track = document.getElementById('spotlightCarousel');
       const approved = allSpotlights.filter(s => getStatusValue(s.Status) === 'approved' && (!s.ExpiresAt || new Date(s.ExpiresAt) > new Date()));
-
+     
       if (!approved.length) { sec.style.display = 'none'; return; }
       sec.style.display = 'block';
-
+     
       track.innerHTML = approved.map((s, i) => {
         const col = avatarColors[i % avatarColors.length];
         return `<div class="card spotlight-card"><span class="badge badge-secondary">${getDaysLeft(s.ExpiresAt)}d left</span><div class="spotlight-header"><div class="avatar" style="background:${col.bg};color:${col.text};">${getInitials(s.Title)}</div><div><p class="spotlight-name">${s.Title || ''}</p><p class="spotlight-title">${s.ManagerTitle || 'Hiring Manager'}</p></div></div><p class="spotlight-job">${s.HighlightedJob || ''}</p>${s.JobLocation ? `<p class="spotlight-location"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>${s.JobLocation}</p>` : ''}<p class="spotlight-quote">"${s.Quote || ''}"</p><div class="spotlight-footer"><span>Live ${getDaysAgo(s.ApprovedAt) === 0 ? 'today' : getDaysAgo(s.ApprovedAt) + 'd ago'}</span>${s.JobLink ? `<a href="${s.JobLink}" target="_blank" class="btn btn-outline btn-sm">View job <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg></a>` : ''}</div></div>`;
@@ -1365,19 +729,19 @@
     function renderAdminPanel() {
       const pending = allSpotlights.filter(s => getStatusValue(s.Status) === 'pending');
       const approved = allSpotlights.filter(s => getStatusValue(s.Status) === 'approved' && (!s.ExpiresAt || new Date(s.ExpiresAt) > new Date()));
-
+     
       document.getElementById('pendingCount').textContent = pending.length ? `(${pending.length})` : '';
       document.getElementById('liveCount').textContent = approved.length ? `(${approved.length})` : '';
-
-      document.getElementById('pendingList').innerHTML = pending.length ? pending.map(s => `<div class="admin-card"><p class="admin-card-name">${s.Title} <span>· ${s.ManagerTitle || 'No title'}</span></p><p class="admin-card-details">${s.HighlightedJob} · ${s.JobLocation || 'No location'}</p><p class="admin-card-quote">"${s.Quote}"</p><p class="admin-card-date">Submitted ${s.SubmittedAt ? new Date(s.SubmittedAt).toLocaleDateString() : 'recently'}</p><div class="admin-card-actions"><button class="btn btn-green btn-sm" onclick="approveSpotlight(${s.ID})">Approve</button><button class="btn btn-destructive btn-sm" onclick="rejectSpotlight(${s.ID})">Reject</button></div></div>`).join('') : '<p style="font-size:0.875rem;color:var(--ink-muted);">No pending submissions.</p>';
-
-      document.getElementById('liveList').innerHTML = approved.length ? approved.map(s => `<div class="admin-card approved"><p class="admin-card-name">${s.Title} <span>· ${s.ManagerTitle}</span></p><p class="admin-card-details">${s.HighlightedJob} · ${s.JobLocation}</p><p class="admin-card-quote">"${s.Quote}"</p><div class="admin-card-footer"><p class="admin-card-date">Expires ${s.ExpiresAt ? new Date(s.ExpiresAt).toLocaleDateString() : 'soon'}</p><button class="btn btn-destructive btn-sm" onclick="removeSpotlight(${s.ID})">Remove</button></div></div>`).join('') : '<p style="font-size:0.875rem;color:var(--ink-muted);">No live spotlights.</p>';
+     
+      document.getElementById('pendingList').innerHTML = pending.length ? pending.map(s => `<div class="admin-card"><p class="admin-card-name">${s.Title} <span>· ${s.ManagerTitle || 'No title'}</span></p><p class="admin-card-details">${s.HighlightedJob} · ${s.JobLocation || 'No location'}</p><p class="admin-card-quote">"${s.Quote}"</p><p class="admin-card-date">Submitted ${s.SubmittedAt ? new Date(s.SubmittedAt).toLocaleDateString() : 'recently'}</p><div class="admin-card-actions"><button class="btn btn-green btn-sm" onclick="approveSpotlight(${s.ID})">Approve</button><button class="btn btn-destructive btn-sm" onclick="rejectSpotlight(${s.ID})">Reject</button></div></div>`).join('') : '<p style="font-size:0.875rem;color:var(--muted-foreground);">No pending submissions.</p>';
+     
+      document.getElementById('liveList').innerHTML = approved.length ? approved.map(s => `<div class="admin-card approved"><p class="admin-card-name">${s.Title} <span>· ${s.ManagerTitle}</span></p><p class="admin-card-details">${s.HighlightedJob} · ${s.JobLocation}</p><p class="admin-card-quote">"${s.Quote}"</p><div class="admin-card-footer"><p class="admin-card-date">Expires ${s.ExpiresAt ? new Date(s.ExpiresAt).toLocaleDateString() : 'soon'}</p><button class="btn btn-destructive btn-sm" onclick="removeSpotlight(${s.ID})">Remove</button></div></div>`).join('') : '<p style="font-size:0.875rem;color:var(--muted-foreground);">No live spotlights.</p>';
     }
 
     function scrollCarousel(dir) {
       const approved = allSpotlights.filter(s => getStatusValue(s.Status) === 'approved' && (!s.ExpiresAt || new Date(s.ExpiresAt) > new Date()));
-      const max = Math.max(0, (approved.length - 2) * 280);
-      carouselPosition = dir === 'left' ? Math.max(0, carouselPosition - 280) : Math.min(max, carouselPosition + 280);
+      const max = Math.max(0, (approved.length - 2) * 276);
+      carouselPosition = dir === 'left' ? Math.max(0, carouselPosition - 276) : Math.min(max, carouselPosition + 276);
       document.getElementById('spotlightCarousel').style.transform = `translateX(-${carouselPosition}px)`;
     }
 
